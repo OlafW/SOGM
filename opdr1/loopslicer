@@ -16,13 +16,13 @@ numbSamps=`soxi -s $fileName`
 Slice=$(( $numbSamps / $2 ))
 eind=$Slice
 begin=0
-s=s
+
 
 
 for(( i=1; i<=$2; i++ ))
 do
 	newFile=`basename $fileName .wav`$i.wav
-	sox $fileName $newFile trim $begin$s =$eind$s
+	sox $fileName $newFile trim $begin"s" =$eind"s"
 	begin=$(( $begin + $Slice ))
 	eind=$(( $eind + $Slice ))
 
