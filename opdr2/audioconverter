@@ -1,4 +1,5 @@
 #! /bin/bash
+#Olaf Wisselink
 
 path="`pwd`/converted_files" 
 fileType=.$1
@@ -22,7 +23,7 @@ else
 		
 		if [ ! -d "${path}" ]; then
 			mkdir "${path}"
-		fi
+		fi 
 		
 		for file in *$fileType ; do 
 		echo "$0: converting: "${file}" to "${path}""
@@ -30,7 +31,7 @@ else
 		lame -V2 "${file}" /"${path}"/"${outFile}" ;
 		
 	 done
-		 open /"${path}" 
+		 open /"${path}"
 		
 	elif [ $var_answer == "no" ]; then
 		
