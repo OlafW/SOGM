@@ -30,7 +30,7 @@ else
 		lame -V2 "${file}" /"${path}"/"${outFile}" ;
 		
 	 done
-		 open /"${path}"
+		 open /"${path}" 
 		
 	elif [ $var_answer == "no" ]; then
 		
