@@ -1,5 +1,4 @@
 #! /bin/bash
-#Olaf Wisselink
 
 path="`pwd`/converted_files" 
 fileType=.$1
