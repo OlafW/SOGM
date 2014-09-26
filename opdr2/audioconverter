@@ -20,13 +20,17 @@ else
 	
 	if [ $var_answer == "yes" ]; then
 		
+		if [ ! -d "${path}" ]; then
+			mkdir "${path}"
+		fi
 		
 		for file in *$fileType ; do 
 		echo "$0: converting: "${file}" to "${path}""
 		outFile="`basename "${file}" $fileType`$encodType"
 		lame -V2 "${file}" /"${path}"/"${outFile}" ;
-		open /"${path}"
+		
 	 done
+		 open /"${path}"
 		
 	elif [ $var_answer == "no" ]; then
 		
