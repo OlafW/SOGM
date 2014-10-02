@@ -2,17 +2,16 @@
 #include <math.h>
 using namespace std;
 
-#define PI 3.14159265
+
 
 int main()
 {
 	float sampleRate = 48000;
 	float freq = 480;
-	float stap = sampleRate/freq;
+	float step = sampleRate/freq;
 	
-	for(float i=0; i<stap; i++) {
-		cout <<	sin (i* (PI / (stap*0.5))) << endl;	
+	for(int i=0; i<step; i++) {
+		float val = sin(i* 2*M_PI / step);
+		cout << val << endl;	
 	}
-	
-	return 0;
 }
