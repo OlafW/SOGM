@@ -11,8 +11,8 @@ void print_array(int array[], int length) {
 }
 
 int main(int argc, char *argv[]) {
-	int var_array[argc - 1];
 	int length = argc -1;
+	int var_array[length];
 	if(argc == 1) {
 		cout << "Geef een array" << endl;
 	}
