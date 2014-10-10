@@ -1,5 +1,5 @@
 #include <iostream>
-#include <stdlib.h> 
+#include <stdlib.h>
 
 using namespace std;
 
@@ -16,12 +16,12 @@ int main(int argc, char *argv[]) {
 	if(argc == 1) {
 		cout << "Geef een array" << endl;
 	}
-	
+
 	else {
 	for(int i = 0; i < var_length; i++) {
 		var_array[i] = atoi(argv[i+1]);
 	}
-	
+
 	print_array(var_array, var_length);
 	return 0;
 	}

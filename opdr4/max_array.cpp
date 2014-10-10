@@ -4,15 +4,15 @@
 using namespace std;
 
 
-void max_array(int array[], int length) {
+int max_array(int array[], int length) {
 	int max =0;
-	
+
 	for (int index=0; index < length; index++) {
 		if(array[index] >= max) {
-			max = array[index];			
-		}	
+			max = array[index];
+		}
 	}
-	cout << "Maximum: " << max << endl;
+	return max;
 }
 
 
@@ -26,8 +26,9 @@ int main(int argc, char *argv[]) {
 	for(int i = 0; i < var_length; i++) {
 		var_array[i] = atoi(argv[i+1]);
 	}
-	
-	max_array(var_array, var_length);
+
+	int result = max_array(var_array, var_length);
+	cout << "Maximum: " << result << endl;
 	return 0;
 	}
 }
