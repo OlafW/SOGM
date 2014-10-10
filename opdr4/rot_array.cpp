@@ -5,7 +5,7 @@ using namespace std;
 
 
 void rot_array(int array[], int length) {
-	int rotN = 2; //aantal rotaties
+	int rotN = 1; //aantal rotaties
 
 	cout << "array " << rotN << " keer geroteerd: ";
 	for(int i = rotN; i < length; i++) {
