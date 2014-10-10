@@ -5,9 +5,9 @@ using namespace std;
 
 
 void rot_array(int array[], int length) {
-	int rotN = 1; //aantal rotaties
+	int rotN = 2; //aantal rotaties
 
-	cout << "Geroteerde array: ";
+	cout << "array " << rotN << " keer geroteerd: ";
 	for(int i = rotN; i < length; i++) {
 		cout << array[i] << " ";
 	}
@@ -26,9 +26,10 @@ int main(int argc, char *argv[]) {
 		cout << "Geef een array" << endl;
 	}
 	else {
-		for(int i = 0; i < var_length; i++) {
+		  for(int i = 0; i < var_length; i++) {
 			var_array[i] = atoi(argv[i+1]);
 		}
+
 	rot_array(var_array, var_length);
 	return 0;
 	}
