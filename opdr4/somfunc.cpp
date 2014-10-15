@@ -23,9 +23,9 @@ int main(int argc, char *argv[]) {
 	for (int i = 0; i < var_length; i++) {
 		var_array[i] = atoi(argv[i+1]);
 	}
-	
+
 	int totaal = som(var_array, var_length);
-	cout << totaal << endl;
+	cout << "Totaal: " << totaal << endl;
 	return 0;
 	}
 }

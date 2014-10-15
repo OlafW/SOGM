@@ -1,20 +1,28 @@
-all: somfunc print_array max_array rot_array
+dir = exec
+
+all: dir somfunc print_array max_array rot_array clean
+
+dir:
+	mkdir -p ${dir}
 
 somfunc: somfunc.cpp
 	g++ -c somfunc.cpp
-	g++ -o somfunc somfunc.o
+	g++ -o ${dir}/$@ $@.o
 
 
 print_array: print_array.cpp
 	g++ -c print_array.cpp
-	g++ -o print_array print_array.o
+	g++ -o ${dir}/$@ $@.o
 
 max_array: max_array.cpp
 		g++ -c max_array.cpp
-		g++ -o max_array max_array.o
+		g++ -o ${dir}/$@ $@.o
 
 
 rot_array: rot_array.cpp
 		g++ -c rot_array.cpp
-		g++ -o rot_array rot_array.o
+		g++ -o ${dir}/$@ $@.o
 
+
+clean:
+	rm -f *.o
