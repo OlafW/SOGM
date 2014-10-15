@@ -14,6 +14,7 @@ print_array: print_array.cpp
 	g++ -c print_array.cpp
 	g++ -o ${dir}/$@ $@.o
 
+
 max_array: max_array.cpp
 		g++ -c max_array.cpp
 		g++ -o ${dir}/$@ $@.o

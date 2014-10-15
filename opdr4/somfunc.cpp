@@ -26,6 +26,7 @@ int main(int argc, char *argv[]) {
 
 	int totaal = som(var_array, var_length);
 	cout << "Totaal: " << totaal << endl;
+	
 	return 0;
 	}
 }
