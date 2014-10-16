@@ -19,7 +19,7 @@ void rot_array(int *array, int length, int rotN) {
 int main(int argc, char *argv[]) {
 	int var_length = argc-1;
 	int var_array[var_length];
-	int varRot;
+	int var_rot;
 	if(argc == 1) {
 		cout << "Geef een array" << endl;
 	}
@@ -29,8 +29,8 @@ int main(int argc, char *argv[]) {
 		}
 
 	cout << "Geef het aantal rotaties: ";
-	cin >> varRot;
-	rot_array(var_array, var_length, varRot);
+	cin >> var_rot;
+	rot_array(var_array, var_length, var_rot);
 	for (int i = 0; i < var_length; i++) {
 		cout << var_array[i] << " ";
 	}
