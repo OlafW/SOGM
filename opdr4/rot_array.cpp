@@ -4,17 +4,17 @@
 using namespace std;
 
 
-void rot_array(int array[], int length) {
+void rot_array(int *array, int length) {
 	int rotN = 1; //aantal rotaties
+	int temp[length];
 
+	for (int i = 0; i < length; i++) {
+		temp[(i + length - (rotN % length)) % length] = array[i];
+	}
+	for (int i = 0; i < length; i++) {
+			array[i] = temp[i];
+	}
 	cout << "array " << rotN << " keer geroteerd: ";
-	for(int i = rotN; i < length; i++) {
-		cout << array[i] << " ";
-	}
-	for (int i = 0; i < rotN; i++ ) {
-		cout << array[i] << " ";
-	}
-	cout << endl;
 }
 
 
@@ -31,6 +31,10 @@ int main(int argc, char *argv[]) {
 		}
 
 	rot_array(var_array, var_length);
+	for (int i = 0; i < var_length; i++) {
+		cout << var_array[i] << " ";
+	}
+	cout << endl;
 	return 0;
 	}
 }
