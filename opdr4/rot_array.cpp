@@ -5,13 +5,13 @@ using namespace std;
 
 
 void rot_array(int *array, int length, int rotN) {
-	int temp[length];
+	int temp_array[length];
 
 	for (int i = 0; i < length; i++) {
-		temp[(i + length - (rotN % length)) % length] = array[i];
+		temp_array[(i + length - (rotN % length)) % length] = array[i];
 	}
 	for (int i = 0; i < length; i++) {
-			array[i] = temp[i];
+			array[i] = temp_array[i];
 	}
 }
 
@@ -35,6 +35,6 @@ int main(int argc, char *argv[]) {
 		cout << var_array[i] << " ";
 	}
 	cout << endl;
-	return 0;
 	}
+	return 0;
 }
