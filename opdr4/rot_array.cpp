@@ -4,8 +4,7 @@
 using namespace std;
 
 
-void rot_array(int *array, int length) {
-	int rotN = 1; //aantal rotaties
+void rot_array(int *array, int length, int rotN) {
 	int temp[length];
 
 	for (int i = 0; i < length; i++) {
@@ -14,14 +13,13 @@ void rot_array(int *array, int length) {
 	for (int i = 0; i < length; i++) {
 			array[i] = temp[i];
 	}
-	cout << "array " << rotN << " keer geroteerd: ";
 }
 
 
 int main(int argc, char *argv[]) {
 	int var_length = argc-1;
 	int var_array[var_length];
-
+	int varRot;
 	if(argc == 1) {
 		cout << "Geef een array" << endl;
 	}
@@ -30,7 +28,9 @@ int main(int argc, char *argv[]) {
 			var_array[i] = atoi(argv[i+1]);
 		}
 
-	rot_array(var_array, var_length);
+	cout << "Geef het aantal rotaties: ";
+	cin >> varRot;
+	rot_array(var_array, var_length, varRot);
 	for (int i = 0; i < var_length; i++) {
 		cout << var_array[i] << " ";
 	}
