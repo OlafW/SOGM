@@ -21,12 +21,15 @@ void SineWave::setDuration(float new_dur) {
 }
 
 
-void SineWave::generate() {
+float* SineWave::generate() {
+
   period = sampleRate/frequency;
   duration = sampleRate*duration;
+  val = new float[duration];
 
 	 for (int i=0; i<duration; i++) {
-		   val = sin(i* 2*M_PI / period ) * amplitude;
-       cout << val << endl;
+		   val[i] = sin(i* 2*M_PI / period ) * amplitude;
      }
+     return val;
+     delete[] val;
 }

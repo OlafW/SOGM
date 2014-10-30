@@ -9,14 +9,14 @@ private:
   int sampleRate;
   int frequency;
   float amplitude;
-  float duration;
-  float val;
+  int duration;
   float period;
+  float* val;
 
 public:
   void setFrequency(int new_freq);
   void setAmplitude(float new_amp);
-  void setSampleRate(int new_samplerate);
+  void setSampleRate(int new_samplerate=44100);
   void setDuration(float new_dur);
-  void generate();
+  float* generate();
 };

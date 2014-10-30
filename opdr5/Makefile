@@ -6,7 +6,7 @@ dir:
 	mkdir -p ${dir}
 
 main: main.o sinewave.o
-	g++ -o ${dir}/$@ ${CFLAGS} main.o sinewave.o
+	g++ -o $@ main.o sinewave.o
 
 main.o: main.cpp
 	g++ -c main.cpp -o main.o
