@@ -11,7 +11,7 @@ private:
   float amplitude;
   float duration;
   float val;
-  int period;
+  float period;
 
 public:
   void setFrequency(int new_freq);
