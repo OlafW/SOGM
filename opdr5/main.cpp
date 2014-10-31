@@ -20,32 +20,18 @@ int main(int argc, char *argv[]) {
   else {
 
   SineWave sine;
-
-  float* x;
+  float* tempSize;
 
   sine.setFrequency(atoi(argv[ARG_FREQ]));
   sine.setAmplitude(atof(argv[ARG_AMP]));
   sine.setSampleRate();
   sine.setDuration(atof(argv[ARG_DUR]));
 
-  x = sine.generate();
+  tempSize = sine.generate();
   for (int i = 0; i < atoi(argv[ARG_FREQ])*atof(argv[ARG_DUR]); i++) {
-    cout << x[i] << endl;
+    cout << tempSize[i] << endl;
   }
 
   }
   return 0;
 }
-
-
-/*
-GNUplot
-
-cd ..
-make
-cd exec/
-main > sine.txt
-gnuplot
-plot "sine.txt" with lines
-
-*/
