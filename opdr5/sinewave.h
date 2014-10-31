@@ -16,7 +16,7 @@ private:
 public:
   void setFrequency(int new_freq);
   void setAmplitude(float new_amp);
-  void setSampleRate(int new_samplerate=44100);
-  void setDuration(float new_dur);
+  int setSampleRate(int new_samplerate=44100);
+  float setDuration(float new_dur);
   float* generate();
 };

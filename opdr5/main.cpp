@@ -28,7 +28,8 @@ int main(int argc, char *argv[]) {
   sine.setDuration(atof(argv[ARG_DUR]));
 
   tempSize = sine.generate();
-  for (int i = 0; i < atoi(argv[ARG_FREQ])*atof(argv[ARG_DUR]); i++) {
+  for (int i = 0; i < sine.setSampleRate() *
+    sine.setDuration(atof(argv[ARG_DUR])); i++) {
     cout << tempSize[i] << endl;
   }
 

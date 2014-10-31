@@ -11,13 +11,15 @@ void SineWave::setAmplitude(float new_amp) {
 }
 
 
-void SineWave::setSampleRate(int new_samplerate) {
+int SineWave::setSampleRate(int new_samplerate) {
   sampleRate = new_samplerate;
+  return sampleRate;
 }
 
 
-void SineWave::setDuration(float new_dur) {
+float SineWave::setDuration(float new_dur) {
   duration = new_dur;
+  return duration;
 }
 
 
