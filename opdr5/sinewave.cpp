@@ -25,10 +25,10 @@ float* SineWave::generate() {
 
   period = sampleRate/frequency;
   duration = sampleRate*duration;
-  val = new float[duration];
+  val = new float[int(duration)];
 
 	 for (int i=0; i<duration; i++) {
-		   val[i] = sin(i* 2*M_PI / period ) * amplitude;
+		   val[i] = sin( i* 2*M_PI / period ) * amplitude;
      }
      return val;
      delete[] val;

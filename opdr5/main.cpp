@@ -21,11 +21,17 @@ int main(int argc, char *argv[]) {
 
   SineWave sine;
 
+  float* x;
+
   sine.setFrequency(atoi(argv[ARG_FREQ]));
   sine.setAmplitude(atof(argv[ARG_AMP]));
   sine.setSampleRate();
   sine.setDuration(atof(argv[ARG_DUR]));
-  cout << sine.generate() << endl;
+
+  x = sine.generate();
+  for (int i = 0; i < atoi(argv[ARG_FREQ])*atof(argv[ARG_DUR]); i++) {
+    cout << x[i] << endl;
+  }
 
   }
   return 0;

@@ -9,7 +9,7 @@ private:
   int sampleRate;
   int frequency;
   float amplitude;
-  int duration;
+  float duration;
   float period;
   float* val;
 
