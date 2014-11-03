@@ -6,6 +6,9 @@
 
 int main(int argc, char *argv[]) {
 
+  SineWave sine;
+  float* tempSize;
+
   enum{ARG_NAME = 0, ARG_FREQ, ARG_AMP, ARG_DUR, NUM_ARGS};
 
   if (argc != NUM_ARGS || atoi(argv[ARG_FREQ]) < 1 ||
@@ -19,9 +22,6 @@ int main(int argc, char *argv[]) {
 
   else {
 
-  SineWave sine;
-  float* tempSize;
-
   sine.setFrequency(atoi(argv[ARG_FREQ]));
   sine.setAmplitude(atof(argv[ARG_AMP]));
   sine.setSampleRate();
@@ -31,8 +31,9 @@ int main(int argc, char *argv[]) {
   for (int i = 0; i < sine.setSampleRate() *
     sine.setDuration(atof(argv[ARG_DUR])); i++) {
     cout << tempSize[i] << endl;
-  }
+    }
 
+  delete[] tempSize;
   }
   return 0;
 }

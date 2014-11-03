@@ -33,5 +33,4 @@ float* SineWave::generate() {
 		   val[i] = sin( i* 2*M_PI / period ) * amplitude;
      }
   return val;
-  delete[] val;
 }
