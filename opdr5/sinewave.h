@@ -1,9 +1,19 @@
+#ifndef _SINE_H_
+#define _SINE_H_
+
 #include <string>
 #include <math.h>
 using namespace std;
 
 
 class SineWave {
+
+public:
+    void setFrequency(int frequency);
+    void setAmplitude(float amplitude);
+    int setSampleRate(int sampleRate=44100);
+    float setDuration(float duration);
+    float* generate();
 
 private:
   int sampleRate;
@@ -13,11 +23,6 @@ private:
   float period;
   float* val;
 
-
-public:
-  void setFrequency(int new_freq);
-  void setAmplitude(float new_amp);
-  int setSampleRate(int new_samplerate=44100);
-  float setDuration(float new_dur);
-  float* generate();
 };
+
+#endif

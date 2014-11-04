@@ -1,18 +1,19 @@
+CC = g++
+CFLAGS = -Wall
+
 dir = exec
+OBJ = main.o sinewave.o
 
 all: dir main clean
 
 dir:
 	mkdir -p ${dir}
 
-main: main.o sinewave.o
-	g++ -o ${dir}/$@ main.o sinewave.o
+main: $(OBJ)
+	$(CC) -o ${dir}/$@ $(OBJ)
 
-main.o: main.cpp
-	g++ -c main.cpp -o main.o
-
-sinewave.o: sinewave.cpp
-	g++ -c sinewave.cpp -o sinewave.o
+.cpp.o:
+	$(CC) -c $< $(CFLAGS)
 
 clean:
 	rm -f *.o

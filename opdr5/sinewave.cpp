@@ -1,24 +1,24 @@
 #include "sinewave.h"
 #include <iostream>
 
-void SineWave::setFrequency(int new_freq)  {
-  frequency = new_freq;
+void SineWave::setFrequency(int frequency)  {
+  this->frequency = frequency;
 }
 
 
-void SineWave::setAmplitude(float new_amp) {
-  amplitude = new_amp;
+void SineWave::setAmplitude(float amplitude) {
+   this->amplitude = amplitude;
 }
 
 
-int SineWave::setSampleRate(int new_samplerate) {
-  sampleRate = new_samplerate;
+int SineWave::setSampleRate(int sampleRate) {
+  this->sampleRate = sampleRate;
   return sampleRate;
 }
 
 
-float SineWave::setDuration(float new_dur) {
-  duration = new_dur;
+float SineWave::setDuration(float duration) {
+  this->duration = duration;
   return duration;
 }
 
