@@ -1,0 +1,84 @@
+#include <iostream>
+#include <stdio.h>
+#include <cstdlib>
+#include <math.h>
+#include <string>
+#include <sndfile.h>
+
+using namespace std;
+
+
+enum{ARG_NAME = 0, ARG_PATH, ARG_GAIN, NUM_ARGS};
+
+SF_INFO sfInfo;
+SNDFILE* inFile;
+SNDFILE* outFile;
+
+char* path;
+string outName;
+string extension;
+float gain;
+float maxVal = 0;
+float absVal;
+int sampleRate;
+int channels;
+int numFrames;
+
+
+
+
+int main(int argc, char* argv[]) {
+
+  if (argc != NUM_ARGS) {
+      cout << "Give: \n"
+            "- file path \n"
+            "- gain" << endl;
+      return -1;
+  }
+
+  path = argv[ARG_PATH];
+  gain = atof(argv[ARG_GAIN]);
+  inFile = sf_open(path, SFM_READ, &sfInfo);
+
+  if(inFile == NULL) {
+    cout << "Error opening file" << endl;
+    return -1;
+  }
+
+  sampleRate = sfInfo.samplerate;
+  channels = sfInfo.channels;
+  numFrames = sfInfo.frames;
+  cout << "Length: " << numFrames/sampleRate << "s" << endl;
+  cout << "Channels: " << channels << endl;
+  cout << "Samplerate: " << sampleRate << endl;
+
+
+  float buffer[numFrames*channels];
+  sf_read_float(inFile, buffer, numFrames);
+
+  for (int i = 0; i < numFrames*channels; i++) {
+    if (fabs(buffer[i]) > maxVal) {
+      maxVal = fabs(buffer[i]);
+    }
+  }
+  cout << "Peak value: " << 20*log(maxVal) << " dB" << endl;
+  cout << "New max value: " << 20*log(maxVal*gain) << " dB"  << endl;
+
+  for (int i = 0; i < numFrames*channels; i++) {
+    buffer[i] = buffer[i] / maxVal * gain;
+  }
+
+  outName = path;
+  unsigned find_ext = outName.find_last_of(".");
+  extension = outName.substr(find_ext);
+  outName = outName.substr(0,find_ext);
+  outName = outName + "_norm" + extension;
+
+  outFile = sf_open(outName.c_str(), SFM_WRITE, &sfInfo);
+  sf_write_float(outFile, buffer, numFrames);
+
+  cout << "Normalised file: " << outName << endl;
+  sf_close(inFile);
+  sf_close(outFile);
+  return 0;
+}
