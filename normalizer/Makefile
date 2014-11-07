@@ -5,7 +5,7 @@ CFLAGS = -Wall
 all: normalizer
 
 normalizer: normalizer.cpp
-	$(CC) -c $@.cpp -o $@.o ${CFLAGS}
+	$(CC) -c $@.cpp ${CFLAGS}
 	$(CC) -o $@ $@.o ${CFLAGS} ${LIBS}
 
 clean:

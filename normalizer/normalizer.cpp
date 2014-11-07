@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
   cout << "Peak value: " << 20*log(maxVal) << " dB" << endl;
 
   for (int i = 0; i < numFrames*channels; i++) {
-    buffer[i] = buffer[i] * (gain / maxVal);
+    buffer[i] = buffer[i] * gain / maxVal;
   }
 
   outName = path;
