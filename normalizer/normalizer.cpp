@@ -25,8 +25,6 @@ int channels;
 int numFrames;
 
 
-
-
 int main(int argc, char* argv[]) {
 
   if (argc != NUM_ARGS || atof(argv[ARG_GAIN]) <= 0 ||
@@ -63,10 +61,9 @@ int main(int argc, char* argv[]) {
     }
   }
   cout << "Peak value: " << 20*log(maxVal) << " dB" << endl;
-  cout << "New max value: " << 20*log(maxVal*gain) << " dB"  << endl;
 
   for (int i = 0; i < numFrames*channels; i++) {
-    buffer[i] = buffer[i] / maxVal * gain;
+    buffer[i] = buffer[i] * (gain / maxVal);
   }
 
   outName = path;
