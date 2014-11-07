@@ -29,10 +29,11 @@ int numFrames;
 
 int main(int argc, char* argv[]) {
 
-  if (argc != NUM_ARGS) {
+  if (argc != NUM_ARGS || atof(argv[ARG_GAIN]) <= 0 ||
+      atof(argv[ARG_GAIN]) > 1 ) {
       cout << "Give: \n"
             "- file path \n"
-            "- gain" << endl;
+            "- gain(0 < gain > 1)" << endl;
       return -1;
   }
 
@@ -80,5 +81,6 @@ int main(int argc, char* argv[]) {
   cout << "Normalised file: " << outName << endl;
   sf_close(inFile);
   sf_close(outFile);
+
   return 0;
 }
