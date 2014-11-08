@@ -5,7 +5,8 @@
 enum{ARG_NAME = 0, ARG_LEVEL, NUM_ARGS};
 
 float newLevel;
-float buffer[] = { 0, 0.5, 1, 0.5, 0, -0.5, -1, -0.5, 0, 0.5 };
+float buffer[] = {0, 0.5, 1, 0.5, 0, -0.5, -1, -0.5, 0, 0.5};
+float* tempbuffer;
 
 int main(int argc, char* argv[]) {
 
@@ -17,12 +18,16 @@ int main(int argc, char* argv[]) {
   newLevel = atof(argv[ARG_LEVEL]);
 
   Amplifier amp;
+  cout << "Amplifier level: " << amp.showLevel() << endl;
+
   amp.setLevel(newLevel);
   amp.readSamples(buffer);
   amp.processSamples();
-  amp.writeSamples();
-  cout << "Amplifier level: " << amp.showLevel() << endl;
+  tempbuffer = amp.writeSamples();
+  for(int i = 0; i <10; i++) {
+    cout << tempbuffer[i] << endl;
+  }
 
   return 0;
 
-} //Main programma
+} //Main
