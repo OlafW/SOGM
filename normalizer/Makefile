@@ -2,7 +2,6 @@ CC = g++
 LIBS = -lsndfile
 CFLAGS = -Wall
 
-
 all: normalizer
 
 normalizer: normalizer.cpp

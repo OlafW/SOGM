@@ -80,5 +80,4 @@ int main(int argc, char* argv[]) {
   sf_close(outFile);
 
   return 0;
-  
 }
