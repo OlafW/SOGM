@@ -5,7 +5,7 @@
 enum{ARG_NAME = 0, ARG_LEVEL, NUM_ARGS};
 
 float newLevel;
-float buffer[10] = {0, 0.5, 1, 0.5, 0, -0.5, -1, -0.5 0, 0.5};
+float buffer[] = { 0, 0.5, 1, 0.5, 0, -0.5, -1, -0.5, 0, 0.5 };
 
 int main(int argc, char* argv[]) {
 

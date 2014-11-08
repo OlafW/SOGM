@@ -19,7 +19,7 @@ public:
 
 private:
   float level;
-  float buffer[BUFFERSIZE];
+  float* buffer;
 
 }; //Amplifier class
 

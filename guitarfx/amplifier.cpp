@@ -30,5 +30,4 @@ void Amplifier::writeSamples() {
   for (int i = 0; i<BUFFERSIZE; i++) {
     cout << buffer[i] << endl;
   }
-
 }
