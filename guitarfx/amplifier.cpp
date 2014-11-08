@@ -12,16 +12,23 @@ float Amplifier::showLevel() {
 }
 
 
-void readSamples(float buffer[]) {
+void Amplifier::readSamples(float buffer[]) {
+  this->buffer = buffer;
 
 }
 
 
-void processSamples(float buffer[]) {
+void Amplifier::processSamples() {
+  for (int i = 0; i<BUFFERSIZE; i++) {
+    buffer[i] = buffer[i] * level;
+  }
 
 }
 
 
-void writeSamples(float buffer[]) {
+void Amplifier::writeSamples() {
+  for (int i = 0; i<BUFFERSIZE; i++) {
+    cout << buffer[i] << endl;
+  }
 
 }

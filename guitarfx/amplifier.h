@@ -14,8 +14,8 @@ public:
   void setLevel(float level);
   float showLevel();
   void readSamples(float buffer[]);
-  void processSamples(float buffer[]);
-  void writeSamples(float buffer[]);
+  void processSamples();
+  void writeSamples();
 
 private:
   float level;

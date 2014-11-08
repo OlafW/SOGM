@@ -5,6 +5,7 @@
 enum{ARG_NAME = 0, ARG_LEVEL, NUM_ARGS};
 
 float newLevel;
+float buffer[10] = {0, 0.5, 1, 0.5, 0, -0.5, -1, -0.5 0, 0.5};
 
 int main(int argc, char* argv[]) {
 
@@ -17,6 +18,9 @@ int main(int argc, char* argv[]) {
 
   Amplifier amp;
   amp.setLevel(newLevel);
+  amp.readSamples(buffer);
+  amp.processSamples();
+  amp.writeSamples();
   cout << "Amplifier level: " << amp.showLevel() << endl;
 
   return 0;
