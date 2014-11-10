@@ -68,7 +68,6 @@ int main(int argc, char* argv[]) {
     buffer[i] = buffer[i] * gain / maxVal;
   }
 
-
   outName = path;
   unsigned find_ext = outName.find_last_of(".");
   extension = outName.substr(find_ext);
