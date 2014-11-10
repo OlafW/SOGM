@@ -22,7 +22,7 @@ float maxVal = 0;
 float absVal;
 int sampleRate;
 int channels;
-int numFrames;
+long int numFrames;
 
 
 int main(int argc, char* argv[]) {
@@ -47,13 +47,15 @@ int main(int argc, char* argv[]) {
   sampleRate = sfInfo.samplerate;
   channels = sfInfo.channels;
   numFrames = sfInfo.frames;
-  cout << "Length: " << numFrames/sampleRate << "s" << endl;
+  cout << "Gain: " << gain << endl;
+  cout << "Length: " << float(numFrames/sampleRate) << "s" << endl;
   cout << "Channels: " << channels << endl;
   cout << "Samplerate: " << sampleRate << endl;
 
 
   float buffer[numFrames*channels];
-  sf_read_float(inFile, buffer, numFrames);
+  sf_readf_float(inFile, buffer, numFrames);
+
 
   for (int i = 0; i < numFrames*channels; i++) {
     if (fabs(buffer[i]) > maxVal) {
@@ -66,6 +68,7 @@ int main(int argc, char* argv[]) {
     buffer[i] = buffer[i] * gain / maxVal;
   }
 
+
   outName = path;
   unsigned find_ext = outName.find_last_of(".");
   extension = outName.substr(find_ext);
@@ -73,9 +76,8 @@ int main(int argc, char* argv[]) {
   outName = outName + "_norm" + extension;
 
   outFile = sf_open(outName.c_str(), SFM_WRITE, &sfInfo);
-  sf_write_float(outFile, buffer, numFrames);
+  sf_writef_float(outFile, buffer, numFrames);
 
-  cout << "Normalised file: " << outName << endl;
   sf_close(inFile);
   sf_close(outFile);
 
