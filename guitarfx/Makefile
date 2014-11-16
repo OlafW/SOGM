@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -Wall
 
-OBJ=amplifier.o main.o
+OBJ=amplifier.o main.o tremolo.o
 
 all: guitarfx
 

@@ -6,20 +6,15 @@
 using namespace std;
 
 
-#define BUFFERSIZE 10
-
 class Amplifier {
 
 public:
   void setLevel(float level);
-  float showLevel();
-  void readSamples(float buffer[]);
-  void processSamples();
-  float* writeSamples();
+  void showLevel();
+  void process();
 
 private:
   float level;
-  float* buffer;
 
 }; //Amplifier class
 
