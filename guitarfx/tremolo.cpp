@@ -2,9 +2,9 @@
 #include <math.h>
 
 
-Tremolo::Tremolo()
+Tremolo::Tremolo() //Constructor
 {
-    Amplifier(); //Constructor
+    Amplifier();
     this->modDepth = 0.75;
     this->modFreq = 0.5;
 }

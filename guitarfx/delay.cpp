@@ -1,8 +1,8 @@
 #include "delay.h"
 
-Delay::Delay()
+Delay::Delay() //Constructor
 {
-    Amplifier(); //Constructor
+    Amplifier();
     this->delayTime = 250;
     this->feedback = 0.5;
 }

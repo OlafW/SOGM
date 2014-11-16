@@ -6,6 +6,7 @@ Amplifier::Amplifier() //Constructor
     this->level=1;
 }
 
+
 void Amplifier::setLevel(float level)
 {
   this->level = level;
