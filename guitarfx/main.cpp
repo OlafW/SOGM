@@ -3,18 +3,16 @@
 #include <iostream>
 
 
-enum{ARG_NAME = 0, ARG_LEVEL, NUM_ARGS};
+enum{ARG_NAME = 0, ARG_LEVEL, ARG_MOD_FREQ, ARG_MOD_DEPTH, NUM_ARGS};
 
+float tempLevel;
+float tempModFreq;
+float tempModDepth;
 
-int main(int argc, char* argv[]) {
-
-  if(argc != NUM_ARGS) {
-    cout << "Give amplifier level" << endl;
-    return -1;
-  }
-
-  float tempLevel = atof(argv[ARG_LEVEL]);
-
+int main(int argc, char* argv[])
+{
+  tempLevel = atof(argv[ARG_LEVEL]);
+  
   Amplifier amp;
   Tremolo trem;
 

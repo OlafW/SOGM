@@ -9,6 +9,7 @@ using namespace std;
 class Amplifier {
 
 public:
+  Amplifier();
   void setLevel(float level);
   void showLevel();
   void process();
