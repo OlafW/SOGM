@@ -1,5 +1,6 @@
 #include "amplifier.h"
 #include "tremolo.h"
+#include "reverser.h"
 #include <iostream>
 
 
@@ -12,13 +13,24 @@ float tempModDepth;
 int main(int argc, char* argv[])
 {
   tempLevel = atof(argv[ARG_LEVEL]);
-  
-  Amplifier amp;
-  Tremolo trem;
 
+  Amplifier amp;
   amp.setLevel(tempLevel);
   amp.showLevel();
+  amp.readSamples();
+  amp.process();
+  amp.writeSamples();
+
+  Tremolo trem;
+  trem.readSamples();
   trem.process();
+  trem.writeSamples();
+
+  Reverser rev;
+  rev.readSamples();
+  rev.process();
+  rev.writeSamples();
+
 
   return 0;
 } //Main

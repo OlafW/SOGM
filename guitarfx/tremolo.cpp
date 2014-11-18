@@ -23,6 +23,11 @@ void Tremolo::setModDepth(float modDepth) {
 
 void Tremolo::process()
 {
+  tremBuffer = getBuffer();
+  for (int i = 0; i < BUFFERSIZE; i++) {
+    tremBuffer[i] = tremBuffer[i] *sin(modFreq) * modDepth;
+  }
+  
   cout << "Tremolo: " << "modDepth = " << modDepth << endl;
   cout << "Tremolo: " << "modFreq = " << modFreq << endl;
   cout << "Tremolo: " << "processing...." << endl;

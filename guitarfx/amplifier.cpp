@@ -18,8 +18,30 @@ void Amplifier::showLevel()
   cout << "Amplifier: " << "level = " << level << endl;
 }
 
+void Amplifier::readSamples()
+{
+  cout << "Reading samples" << endl;
+
+}
+
+float* Amplifier::getBuffer()
+{
+  buffer = new float[BUFFERSIZE];
+  return buffer;
+}
+
 
 void Amplifier::process()
 {
-  cout << "Amplifier: " << "processing..." << endl;
+  for (int i = 0; i < BUFFERSIZE; i++) {
+    buffer[i] = buffer[i] * level;
+  }
+
+  cout << "Amplifier: " << "processing sample" << endl;
+}
+
+
+void Amplifier::writeSamples()
+{
+  cout << "Writing samples" << endl;
 }
