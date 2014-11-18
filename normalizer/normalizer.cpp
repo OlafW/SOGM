@@ -5,6 +5,7 @@
 #include <string>
 #include <sndfile.h>
 
+
 using namespace std;
 
 
@@ -62,7 +63,7 @@ int main(int argc, char* argv[]) {
       maxVal = fabs(buffer[i]);
     }
   }
-  cout << "Peak value: " << 20*log(maxVal) << " dB" << endl;
+  cout << "Peak value: " << 20*log10(maxVal) << " dB" << endl;
 
   for (int i = 0; i < numFrames*channels; i++) {
     buffer[i] = buffer[i] * gain / maxVal;
@@ -76,6 +77,8 @@ int main(int argc, char* argv[]) {
 
   outFile = sf_open(outName.c_str(), SFM_WRITE, &sfInfo);
   sf_writef_float(outFile, buffer, numFrames);
+
+  cout << "Normalised file: " << outName << endl;
 
   sf_close(inFile);
   sf_close(outFile);
