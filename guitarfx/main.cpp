@@ -14,12 +14,13 @@ int main(int argc, char* argv[])
 {
   tempLevel = atof(argv[ARG_LEVEL]);
 
-  Amplifier amp;
-  amp.setLevel(tempLevel);
-  amp.showLevel();
-  amp.readSamples();
-  amp.process();
-  amp.writeSamples();
+  Amplifier *amp = new Amplifier;
+
+  amp->setLevel(tempLevel);
+  amp->showLevel();
+  amp->readSamples();
+  amp->process();
+  amp->writeSamples();
 
   Tremolo trem;
   trem.readSamples();
