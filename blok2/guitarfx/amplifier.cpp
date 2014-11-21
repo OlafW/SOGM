@@ -1,6 +1,5 @@
 #include "amplifier.h"
 
-
 Amplifier::Amplifier() //Constructor
 {
     this->level=1;
@@ -18,16 +17,11 @@ void Amplifier::showLevel()
   cout << "Amplifier: " << "level = " << level << endl;
 }
 
+
 void Amplifier::readSamples()
 {
-  cout << "Reading samples" << endl;
+  cout << "reading samples" << endl;
 
-}
-
-float* Amplifier::getBuffer()
-{
-  buffer = new float[BUFFERSIZE];
-  return buffer;
 }
 
 
@@ -37,11 +31,11 @@ void Amplifier::process()
     buffer[i] = buffer[i] * level;
   }
 
-  cout << "Amplifier: " << "processing sample" << endl;
+  cout << "Amplifier: " << "processing samples" << endl;
 }
 
 
 void Amplifier::writeSamples()
 {
-  cout << "Writing samples" << endl;
+  cout << "writing samples" << endl;
 }

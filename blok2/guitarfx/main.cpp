@@ -12,26 +12,31 @@ float tempModDepth;
 
 int main(int argc, char* argv[])
 {
+  if (argc != 2) {
+    cout << "-guitarfx: error" << endl;
+    cout << "Give amplifier level" << endl;
+    return -1;
+  }
+
   tempLevel = atof(argv[ARG_LEVEL]);
 
-  Amplifier *amp = new Amplifier;
+  Amplifier amp;
 
-  amp->setLevel(tempLevel);
-  amp->showLevel();
-  amp->readSamples();
-  amp->process();
-  amp->writeSamples();
+  amp.setLevel(tempLevel);
+  amp.showLevel();
+  cout << "Amplifier: ";
+  amp.readSamples();
+  amp.process();
+  cout << "Amplifier: ";
+  amp.writeSamples();
 
   Tremolo trem;
+  
+  cout << "Tremolo: ";
   trem.readSamples();
   trem.process();
+  cout << "Tremolo: ";
   trem.writeSamples();
-
-  Reverser rev;
-  rev.readSamples();
-  rev.process();
-  rev.writeSamples();
-
 
   return 0;
 } //Main

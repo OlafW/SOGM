@@ -5,7 +5,10 @@
 
 using namespace std;
 
-#define BUFFERSIZE 10
+#define CHANNELS 1
+#define SAMPLERATE 44100
+#define BUFFERSIZE 10 * CHANNELS
+
 
 class Amplifier {
 
@@ -16,11 +19,12 @@ public:
   void readSamples();
   void process();
   void writeSamples();
-  float* getBuffer();
+
+protected:
+  float buffer[BUFFERSIZE];
 
 private:
   float level;
-  float* buffer;
 
 }; //Amplifier class
 

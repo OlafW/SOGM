@@ -10,8 +10,6 @@ public:
   Reverser();
   void process();
 
-private:
-  float* revBuffer;
 
 }; //Reverser class, reversed een buffer
 

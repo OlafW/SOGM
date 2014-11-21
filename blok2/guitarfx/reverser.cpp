@@ -9,10 +9,9 @@ Reverser::Reverser() //Constructor
 
 void Reverser::process()
 {
-  revBuffer = getBuffer();
   for (int i = 0; i < BUFFERSIZE; i++) {
-  revBuffer[i] = revBuffer[BUFFERSIZE-i];
+  buffer[i] = buffer[BUFFERSIZE-i];
   }
 
-  cout << "Reverser: " << "processing...." << endl;
+  cout << "Reverser: " << "processing samples" << endl;
 }

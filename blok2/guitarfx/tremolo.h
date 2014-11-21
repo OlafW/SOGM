@@ -14,7 +14,8 @@ public:
 private:
   float modFreq;
   float modDepth;
-  float* tremBuffer;
+  float modAmp;
+  
 }; //Tremolo class
 
 #endif

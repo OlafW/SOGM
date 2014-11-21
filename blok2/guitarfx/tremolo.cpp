@@ -6,13 +6,13 @@ Tremolo::Tremolo() //Constructor
 {
     Amplifier();
     this->modDepth = 0.75;
-    this->modFreq = 0.5;
+    this->modFreq = 5;
 }
+
 
 void Tremolo::setModFreq(float modFreq) {
   this->modFreq = modFreq;
 }
-
 
 
 void Tremolo::setModDepth(float modDepth) {
@@ -20,16 +20,14 @@ void Tremolo::setModDepth(float modDepth) {
 }
 
 
-
 void Tremolo::process()
 {
-  tremBuffer = getBuffer();
   for (int i = 0; i < BUFFERSIZE; i++) {
-    tremBuffer[i] = tremBuffer[i] *sin(modFreq) * modDepth;
+    modAmp = sin(i* 2*M_PI / (SAMPLERATE/modFreq) ) * modDepth;
+    buffer[i] = buffer[i] * modAmp;
   }
-  
+
   cout << "Tremolo: " << "modDepth = " << modDepth << endl;
   cout << "Tremolo: " << "modFreq = " << modFreq << endl;
-  cout << "Tremolo: " << "processing...." << endl;
-
+  cout << "Tremolo: " << "processing samples" << endl;
 }
