@@ -20,23 +20,23 @@ int main(int argc, char* argv[])
 
   tempLevel = atof(argv[ARG_LEVEL]);
 
-  Amplifier*  baseFX[3];
-  baseFX[1] = new Tremolo;
-  baseFX[2] = new Reverser;
+  Amplifier*  effect[3];
+  effect[1] = new Tremolo;
+  effect[2] = new Reverser;
 
-  baseFX[1]->setLevel(tempLevel);
-  baseFX[1]->showLevel();
+  effect[1]->setLevel(tempLevel);
+  effect[1]->showLevel();
   cout << "Tremolo: ";
-  baseFX[1]->readSamples();
-  baseFX[1]->process();
+  effect[1]->readSamples();
+  effect[1]->process();
   cout << "Tremolo: ";
-  baseFX[1]->writeSamples();
+  effect[1]->writeSamples();
 
   cout << "Reverser: ";
-  baseFX[2]->readSamples();
-  baseFX[2]->process();
+  effect[2]->readSamples();
+  effect[2]->process();
   cout << "Reverser: ";
-  baseFX[2]->writeSamples();
+  effect[2]->writeSamples();
 
   return 0;
 } //Main enzo
