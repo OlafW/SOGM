@@ -3,7 +3,6 @@
 
 Reverser::Reverser() //Constructor
 {
-    Amplifier();
 }
 
 

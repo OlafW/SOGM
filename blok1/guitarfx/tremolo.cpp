@@ -4,7 +4,6 @@
 
 Tremolo::Tremolo() //Constructor
 {
-    Amplifier();
     this->modDepth = 0.75;
     this->modFreq = 5;
 }

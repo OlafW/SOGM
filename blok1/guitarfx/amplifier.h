@@ -17,7 +17,7 @@ public:
   void setLevel(float level);
   void showLevel();
   void readSamples();
-  void process();
+  virtual void process();
   void writeSamples();
 
 protected:

@@ -21,7 +21,6 @@ int main(int argc, char* argv[])
   tempLevel = atof(argv[ARG_LEVEL]);
 
   Amplifier*  baseFX[3];
-  baseFX[0] = new Amplifier;
   baseFX[1] = new Tremolo;
   baseFX[2] = new Reverser;
 
@@ -40,4 +39,4 @@ int main(int argc, char* argv[])
   baseFX[2]->writeSamples();
 
   return 0;
-} //Main
+} //Main enzo
