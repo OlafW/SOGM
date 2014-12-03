@@ -2,7 +2,7 @@
 #include "tremolo.h"
 #include "reverser.h"
 #include <iostream>
-
+#include "audio_io.h"
 
 enum{ARG_NAME = 0, ARG_LEVEL, ARG_MOD_FREQ, ARG_MOD_DEPTH, NUM_ARGS};
 
