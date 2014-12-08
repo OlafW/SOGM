@@ -3,6 +3,7 @@
 Amplifier::Amplifier() //Constructor
 {
     this->level=1;
+    bufIndex = 0;
 }
 
 
@@ -11,31 +12,21 @@ void Amplifier::setLevel(float level)
   this->level = level;
 }
 
-
-void Amplifier::showLevel()
-{
-  cout << "Amplifier: " << "level = " << level << endl;
-}
-
-
 void Amplifier::readSamples()
 {
-  cout << "reading samples" << endl;
-
+  audiostream.read(buffer);
 }
 
 
 void Amplifier::process()
 {
-  for (int i = 0; i < BUFFERSIZE; i++) {
-    buffer[i] = buffer[i] * level;
-  }
-
-  cout << "Amplifier: " << "processing samples" << endl;
+    for (int bufIndex = 0; bufIndex < FRAMESPERBUFFER * CHANNELS; bufIndex++) {
+    buffer[bufIndex] = buffer[bufIndex] * level;
+    }
 }
 
 
 void Amplifier::writeSamples()
 {
-  cout << "writing samples" << endl;
+  audiostream.write(buffer);
 }

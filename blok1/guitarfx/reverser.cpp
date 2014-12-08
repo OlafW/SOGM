@@ -8,8 +8,8 @@ Reverser::Reverser() //Constructor
 
 void Reverser::process()
 {
-  for (int i = 0; i < BUFFERSIZE; i++) {
-  buffer[i] = buffer[BUFFERSIZE-i];
+  for (bufIndex = 0; bufIndex < FRAMESPERBUFFER * CHANNELS; bufIndex++) {
+  buffer[bufIndex] = buffer[FRAMESPERBUFFER * CHANNELS-bufIndex];
   }
 
   cout << "Reverser: " << "processing samples" << endl;

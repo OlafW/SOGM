@@ -15,7 +15,7 @@ private:
   float modFreq;
   float modDepth;
   float modAmp;
-  
+
 }; //Tremolo class
 
 #endif
