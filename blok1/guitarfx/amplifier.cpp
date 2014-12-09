@@ -12,6 +12,26 @@ void Amplifier::setLevel(float level)
   this->level = level;
 }
 
+
+void Amplifier::audioSetup()
+{
+  audiostream.set_mode(AUDIO_IO_READWRITE);
+  audiostream.set_samplerate(SAMPLERATE);
+  audiostream.set_nrofchannels(CHANNELS);
+  audiostream.set_framesperbuffer(FRAMESPERBUFFER);
+
+  audiostream.initialise();
+  audiostream.list_devices();
+  cout << "\nGive input device number: ";
+  cin >> input_device;
+  audiostream.set_input_device(input_device);
+  cout << "Give output device number: ";
+  cin >> output_device;
+  audiostream.set_output_device(output_device);
+  audiostream.start_server();
+}
+
+
 void Amplifier::readSamples()
 {
   audiostream.read(buffer);

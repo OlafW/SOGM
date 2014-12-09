@@ -16,6 +16,14 @@ int main(int argc, char* argv[])
   effect[1] = new Tremolo;
   effect[2] = new Reverser;
 
+
+  effect[0]->audioSetup();
+
+  while(true) {
+  effect[0]->readSamples();
+  effect[0]->process();
+  effect[0]->writeSamples();
+}
   return 0;
 
 } //Main

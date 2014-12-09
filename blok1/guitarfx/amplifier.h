@@ -17,6 +17,7 @@ public:
   Audio_IO audiostream;
   Amplifier();
   void setLevel(float level);
+  void audioSetup();
   void readSamples();
   virtual void process();
   void writeSamples();
@@ -24,9 +25,12 @@ public:
 protected:
   float buffer[FRAMESPERBUFFER * CHANNELS];
   unsigned long bufIndex;
+  int input_device;
+  int output_device;
 
 private:
   float level;
+
 
 }; //Amplifier class
 
