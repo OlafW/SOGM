@@ -4,9 +4,10 @@
 
 Tremolo::Tremolo() //Constructor
 {
-    this->modDepth = 0.75;
-    this->modFreq = 100;
-    this->modAmp = 0.5;
+    Amplifier();
+    this->modDepth = 1;
+    this->modFreq = 5;
+    sampleIndex = 0;
 }
 
 
@@ -24,6 +25,7 @@ void Tremolo::process()
 {
   for (bufIndex = 0; bufIndex < FRAMESPERBUFFER * CHANNELS; bufIndex++) {
 
-    buffer[bufIndex] = buffer[bufIndex] * (float)(modAmp * sin(modFreq * SAMPLERATE * 2*M_PI) *modDepth);
+    buffer[bufIndex] = buffer[bufIndex] * (sin( sampleIndex * modFreq/SAMPLERATE * 2*M_PI ) *modDepth);
+    sampleIndex++;
   }
 }

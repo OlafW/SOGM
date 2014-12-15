@@ -10,6 +10,9 @@ public:
   Reverser();
   void process();
 
+
+private:
+
 }; //Reverser class, reversed een buffer
 
 #endif

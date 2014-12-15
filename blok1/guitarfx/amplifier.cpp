@@ -13,7 +13,7 @@ void Amplifier::setLevel(float level)
 }
 
 
-void Amplifier::audioSetup()
+void Amplifier::startAudio()
 {
   audiostream.set_mode(AUDIO_IO_READWRITE);
   audiostream.set_samplerate(SAMPLERATE);
@@ -49,4 +49,10 @@ void Amplifier::process()
 void Amplifier::writeSamples()
 {
   audiostream.write(buffer);
+}
+
+
+void Amplifier::stopAudio()
+{
+  audiostream.finalise();
 }
