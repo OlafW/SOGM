@@ -14,7 +14,7 @@ public:
 private:
   float modFreq;
   float modDepth;
-  float sampleIndex;
+  unsigned long sampleIndex;
 
 }; //Tremolo class
 

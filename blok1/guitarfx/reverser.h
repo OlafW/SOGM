@@ -2,6 +2,9 @@
 #define _Reverser_
 
 #include "amplifier.h"
+#include <iostream>
+
+using namespace std;
 
 
 class Reverser : public Amplifier {
@@ -10,9 +13,9 @@ public:
   Reverser();
   void process();
 
-
 private:
-
-}; //Reverser class, reversed een buffer
+  float revBuffer[sampleRate * numSeconds * numChannels];
+  
+};
 
 #endif

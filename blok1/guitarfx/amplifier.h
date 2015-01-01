@@ -6,32 +6,33 @@
 
 using namespace std;
 
-#define SAMPLERATE  44100
-#define CHANNELS  1
-#define FRAMESPERBUFFER	1024
+#define sampleRate 44100
+#define numChannels 1
+#define numFrames	1024
+#define numSeconds 5
 
 class Amplifier : public Audio_IO
 {
 
 public:
-  Audio_IO audiostream;
+  Audio_IO audioStream;
   Amplifier();
+  // virtual ~Amplifier();
   void setLevel(float level);
   void startAudio();
+  void stopAudio();
   void readSamples();
   virtual void process();
   void writeSamples();
-  void stopAudio();
 
 protected:
-  float buffer[FRAMESPERBUFFER * CHANNELS];
+  float buffer[numFrames * numChannels];
   unsigned long bufIndex;
   int input_device;
   int output_device;
 
 private:
   float level;
-  
 
 }; //Amplifier class
 
