@@ -14,8 +14,8 @@ public:
   void process();
 
 private:
-  float revBuffer[sampleRate * numSeconds * numChannels];
-  
+  //float revBuffer[sampleRate * numSeconds * numChannels];
+
 };
 
 #endif
