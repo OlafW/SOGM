@@ -17,6 +17,7 @@ int main(int argc, char* argv[])
 
 
   effect[1]->startAudio();
+  ((Tremolo*)effect[1])->setModFreq(0.5);
 
   while(true) {
   effect[1]->readSamples();
@@ -26,9 +27,9 @@ int main(int argc, char* argv[])
 
   effect[1]->stopAudio();
 
-  for (int i = 0; i<3; i++) {
-    delete effect[i];
-  }
+  // for (int i = 0; i<3; i++) {
+  //   delete effect[i];
+  // }
 
 
   return 0;
