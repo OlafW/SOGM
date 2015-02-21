@@ -1,53 +1,50 @@
-/*
-Simple FIRsystem amplitude response calculation of
-lowpass and highpass filter
-*/
-
-
 #include <iostream>
 #include <complex>
 #include <math.h>
 
-double freq = 0.0;
-double amp = 0.0;
-int count = 100;
+enum{ARG_NAME=0, ARG_ORDER, ARG_COEFF, NUM_ARGS};
 
 std::complex<double> i(0.0, 1.0);
 std::complex<double> z;
 
 
-double lowpass(double freq) {
+float firAnalyse(double freq, float coeff[], int numOrder) {
 
-    z = std::exp(-i * freq);
-    amp = std::sqrt( std::pow(1 + std::real(z), 2.0) + std::pow( std::imag(z), 2.0) ) * 0.5;
+    float H = 0.0;
+    double real = 0.0;
+    double imag = 0.0;
 
-    return amp;
-}
+    for (int n = 0; n<numOrder; n++) {
 
+        z = std::exp(-i * freq * double(n));
+        real += coeff[n]*std::real(z);
+        imag += coeff[n]*std::imag(z);
+    }
 
-double highpass(double freq) {
-
-    z = std::exp(-i * freq);
-    amp = std::sqrt( std::pow(1 - std::real(z), 2.0) + std::pow( std::imag(z), 2.0) ) * 0.5;
-
-    return amp;
+    H = std::sqrt(std::pow(real, 2.0) + std::pow(imag, 2.0));
+    return H;
 }
 
 
 int main(int argc, char* argv[]) {
 
-  for (int i = 0; i<count; i++) {
+  int numOrder;
+  int numFreq = 100;
+  double freq = 0.0;
 
-      std::cout << highpass(freq) << std::endl;
-      freq += (M_PI/count);
+  std::cout << "Give number of orders: ";
+  std::cin >> numOrder;
+  float coeff[numOrder];
+
+  for (int i=0; i<numOrder; i++) {
+      std::cout << "Give coefficient " << i+1 << ": ";
+      std::cin >> coeff[i];
   }
 
-return 0;
-}
+  for (int i=0; i<numFreq; i++) {
+      std::cout << firAnalyse(freq, coeff, numOrder) << std::endl;
+      freq += (M_PI/numFreq);
+  }
 
-/*
-make fir
-fir -> firplot.txt
-gnuplot
-plot "firplot.txt" with lines
-*/
+  return 0;
+}
