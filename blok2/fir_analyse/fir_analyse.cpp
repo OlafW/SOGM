@@ -30,14 +30,13 @@ float firAnalyse(double freq, float coeff[], int numOrder) {
 int main(int argc, char* argv[]) {
 
   int numOrder = 0;
-  int numFreq = 100;
+  int freqRes = 1;
   double freq = 0.0;
   std::ofstream plotFile;
   plotFile.open ("fir_plot.txt");
 
   std::cout << "Give number of orders: ";
   std::cin >> numOrder;
-
   if(numOrder < 1) {
     std::cout << "Number of orders must be >= 1" << std::endl;
     return -1;
@@ -51,12 +50,20 @@ int main(int argc, char* argv[]) {
       std::cin >> coeff[i];
   }
 
-  for (int i=0; i<numFreq; i++) {
+  std::cout << "Give frequency resolution: ";
+  std::cin >> freqRes;
+  if(freqRes < 1) {
+    std::cout << "Give frequency  must be >= 1" << std::endl;
+    return -1;
+  }
+
+  for (int i=0; i<freqRes; i++) {
       plotFile << firAnalyse(freq, coeff, numOrder) <<std::endl;
-      freq += (M_PI/numFreq);
+      freq += (M_PI/freqRes);
   }
 
   std::cout << "Wrote data to fir_plot.txt" << std::endl;
   plotFile.close();
+
   return 0;
 }
