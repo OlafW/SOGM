@@ -1,6 +1,5 @@
 #include "noteEvent.h"
 
-
 NoteEvent::NoteEvent(string note, int timeStamp) {
 	this->note = note;
 	this->timeStamp = timeStamp;
