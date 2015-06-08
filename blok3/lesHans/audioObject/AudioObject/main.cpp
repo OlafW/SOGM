@@ -19,6 +19,16 @@ int main(int argc, const char * argv[])
         audioObjPtr x;
         A.connectA(x);
     }
+    
+    WaveTable sinus;
+    sinus.init();
+    
+    double* data = new double[SIZE*2];
+    float rate = 0.5;
+    
+    for (unsigned long i=0; i<SIZE; i++) {
+        data[i] = sinus.linearInterp(i*rate);
+    }
 
     return 0;
 }

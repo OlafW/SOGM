@@ -9,7 +9,9 @@
 #ifndef __AudioObject__audioObj__
 #define __AudioObject__audioObj__
 
+#include "wavetable.h"
 #include <iostream>
+
 #define BUFFERSIZE 128
 using namespace std;
 
