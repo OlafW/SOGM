@@ -8,9 +8,9 @@ class Event;
 typedef Event* EventPtr;
 
 class Scheduler;
-typedef Scheduler *SchedulerPtr;
+typedef Scheduler* SchedulerPtr;
 
-class Event {
+class Event {   //Element in double linked list
 friend class Scheduler;
 
 public:
@@ -28,7 +28,7 @@ public:
 	bool operator < (Event x);
 
 protected:
-	double time; //time
+	double time; //timeStamp of event
 
 private:
 	static long number;

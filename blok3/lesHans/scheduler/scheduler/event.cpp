@@ -5,8 +5,7 @@ long Event::number = 0;
 Event::Event(double time) {
 	ID = number++;
 	this->time = time;
-	next = NULL;
-	prev = NULL;
+	next = prev = NULL;
 }
 
 Event::~Event() {
@@ -30,10 +29,10 @@ Event::~Event() {
 EventPtr Event::insert(EventPtr ev) {
 	ev->next = next;	//Next of new event becomes this next
 	if (next) {
-		next->prev = ev;	//Prev of next becomes new ev
+		next->prev = ev;	//Prev of next becomes new event
 	}
-	next = ev;	//This next becomes new ev
-	ev->prev = this; //Prev of new ev becomes this
+	next = ev;	//This next becomes new event
+	ev->prev = this; //Prev of new event becomes this
 	return ev;
 }
 

@@ -19,14 +19,14 @@ audioObj::audioObj() {
 double audioObj::process(long t) {
     static double res = 0;
     res += 0.1;
-    if(res > 1.0) { //zaagtand maken als test
+    if(res > 1.0) { //Sawtooth for testing
       res = -1.0;
     }
     return res;
 }
 
 double audioObj::out(long t) {
-    if (t <= lastTime) {    //Check of de berekening voor tijdstip t al is gedaan
+    if (t <= lastTime) {    //Check if already calculated for time t
         return lastValue;
     }
     lastValue = process(t);
@@ -34,8 +34,8 @@ double audioObj::out(long t) {
     return lastValue;
 }
 
-bool audioObj::connectA(audioObjPtr aPtr) {
-    if (numA >= sizeA) {    //Is aantal pointers groter of gelijk aan arraysize: resize
+bool audioObj::connectA(audioObjPtr aPtr) { //Insert a new audioObject in inA
+    if (numA >= sizeA) {    //If number of pointers is greater than arraysize: resize the array
         int newSize;
         audioObjPtr *temp;
         
@@ -43,23 +43,23 @@ bool audioObj::connectA(audioObjPtr aPtr) {
         if (newSize < 1) {
            newSize = 1;
         }
-        temp = new audioObjPtr[newSize];    //Nieuwe array van audioObjPtr's
-        for (int j=0; j<numA; j++) {    //Kopieren naar deze nieuwe
+        temp = new audioObjPtr[newSize];    //New array of audioObjPtr's
+        for (int j=0; j<numA; j++) {    //Copy old array to new one
             temp[j] = inA[j];
         }
-        if (inA) delete[] inA;  //Verwijder de oude array
-        inA = temp; //inA wijst nu naar de nieuwe array
-        sizeA = newSize;   //Arraygrootte is nieuwe grootte
+        if (inA) delete[] inA;  //Delete old array
+        inA = temp; //inA now points to the new array
+        sizeA = newSize;    //Size is now the new size
         cout << newSize << endl;
     }
-    inA[numA] = aPtr;
-    numA ++;    //Aantal pointers in de array += 1
+    inA[numA] = aPtr; //Insert the new audioObject
+    numA ++;    //Number of pointers += 1
     
     return true;
 }
 
-bool audioObj::connectB(audioObjPtr bPtr) {
-    if (numA >= sizeB) {    //Is aantal pointers groter dan arraysize: resize
+bool audioObj::connectB(audioObjPtr bPtr) { //Insert a new audioObj in inB
+    if (numB >= sizeB) {    //If number of pointers is greater than arraysize: resize the array
         int newSize;
         audioObjPtr *temp;
         
@@ -67,16 +67,16 @@ bool audioObj::connectB(audioObjPtr bPtr) {
         if (newSize < 1) {
             newSize = 1;
         }
-        temp = new audioObjPtr[newSize];    //Nieuwe array van audioObjPtr's
-        for (int j=0; j<numB; j++) {    //Kopieren naar deze nieuwe
+        temp = new audioObjPtr[newSize];    //New array of audioObjPtr's
+        for (int j=0; j<numB; j++) {    //Copy old array to new one
             temp[j] = inB[j];
         }
-        if (inB) delete[] inB;  //Verwijder de oude array
-        inA = temp; //inA wijst nu naar de nieuwe array
-        sizeA = newSize;    //Arraygrootte is nieuwe grootte
+        if (inB) delete[] inB;  //Delete old array
+        inB = temp; //inB now points to the new array
+        sizeB = newSize;    //Size is now the new size
     }
-    inA[numB] = bPtr;   //Insert nieuw audioObject in de array
-    numA ++;    //Arraygrootte is nieuwe grootte
+    inB[numB] = bPtr;   //Insert the new audioObject
+    numB ++;    //Number of pointers += 1
     
     return true;
 }

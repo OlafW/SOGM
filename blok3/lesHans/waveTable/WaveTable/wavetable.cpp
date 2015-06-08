@@ -10,7 +10,7 @@
 
 
 WaveTable::WaveTable() {
-    size = SIZE+1;
+    size = SIZE+1;  //Size +1 because you want to interpolate the last value of the buffer
     data = new double[size];
 }
 
@@ -24,16 +24,17 @@ WaveTable::WaveTable(long size) {
 }
 
 void WaveTable::init() {
-    
-    for (unsigned i=0; i<size; i++) {    //1 period of sinus
+    for (unsigned i=0; i<size; i++) {    //1 period of sine function
         data[i] = sin(i * 2*M_PI / size);
-        //cout << data[i] << endl;
     }
 }
 
-void WaveTable::linearInterp(unsigned lookup) {
-    double interp = lookup/size;
-    lookup = floor(lookup % size);
-
-    data[lookup] =  data[lookup] * (1-interp) +  data[lookup+1] * interp;   //linear interpolation
+double WaveTable::linearInterp(double lookup) {
+    int temp = int(lookup); //Truncated value of lookup
+    double interp = lookup - temp;  //Percentage
+    double val = 0;
+    
+    val =  data[temp] * (1-interp) +  data[temp+1] * interp;   //linear interpolation
+    
+    return val;
 }

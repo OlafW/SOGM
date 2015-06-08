@@ -1,7 +1,7 @@
 #include "scheduler.h"
+#include <ctime>
 
-
-Scheduler::Scheduler(double (*fp)()) {	//Constructor needs clock funtion
+Scheduler::Scheduler(double (*fp)()) {	//Constructor needs clock function
 	clock = fp;
 	start = end = last = NULL;
 	tStart = tEnd = tLast = 0.0;
@@ -172,7 +172,16 @@ EventPtr Scheduler::post(Event &aNew) {
 }
 
 long Scheduler::p() {
-	//HIER GEBLEVEN
+	EventPtr temp;
+    double t = clock();
+    while (start && start->time <= t) {
+        temp = start;
+        cout << "\nat: " << t << " ";
+        temp->doIt();
+        start = start->next;
+        delete temp;
+        total --;
+    }
 	return total;
 }
 
@@ -218,11 +227,20 @@ double Scheduler::advance(double delta) {
 }
 
 void Scheduler::flush() {
-
+    cout << " Flushing Event queue" << endl;
+    EventPtr temp;
+    while(start){
+        cout << "Deleting queue of: " << total << " elements" << endl;
+        temp = start->next;
+        delete start;
+        start = temp;
+        total --;
+    }
 }
 
-double Scheduler::sampleClock() {
-	static double val = 0.0;
-	double res = val;val +=0.001;
-	return res;
+double Scheduler::secondsClock() {
+    static bool first = true;
+    double t = clock();
+    //HIER GEBLEVEN
+    return t;
 }

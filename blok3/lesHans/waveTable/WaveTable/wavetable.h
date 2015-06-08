@@ -13,7 +13,7 @@
 #include "math.h"
 using namespace std;
 
-#define SIZE 4096
+#define SIZE 4096   //Buffersize
 
 class WaveTable {
 public:
@@ -21,7 +21,7 @@ public:
     WaveTable(long size);
     ~WaveTable();
     void init();
-    void linearInterp(unsigned lookup);
+    double linearInterp(double lookup);
     
 private:
     double* data;   //data of wavetable

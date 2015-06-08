@@ -6,7 +6,7 @@
 class Scheduler {	//Friend of Event, Event can acces Scheduler's elements
 
 public:
-	Scheduler( double (*fp)() );
+	Scheduler( double (*fp)() );    //Constructor needs clock function
 	~Scheduler();
 	bool postForward(EventPtr here, EventPtr aNew);
 	bool postBackward(EventPtr here, EventPtr aNew);
@@ -30,7 +30,6 @@ public:
 	double advance(double delta);
 	void flush();
 
-	double sampleClock();
 	double secondsClock();
 
 private:
