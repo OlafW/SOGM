@@ -4,27 +4,25 @@
 #include <iostream>
 using namespace std;
 
-class Event;
+class Event;    //Forward declarations
 typedef Event* EventPtr;
 
 class Scheduler;
 typedef Scheduler* SchedulerPtr;
 
 class Event {   //Element in double linked list
-friend class Scheduler;
+friend class Scheduler;     //Friend of Event, Event can access Scheduler's elements
 
 public:
-	Event(double time);
+	Event(double time); //Constructor with timeStamp
 	~Event();
-	EventPtr insert(EventPtr ev);
+    EventPtr prepend(EventPtr ev);
+	EventPtr append(EventPtr ev);
 	void show();
 	void showTiming();
-	virtual void doIt();
+	virtual void doIt();    //Overrided by inheriting class
 
-	EventPtr prevEventPtr();
-	EventPtr nextEventPtr();
-	bool GEthan(Event x);
-	bool operator >= (Event x);
+	bool operator >= (Event x); //Operator overloading
 	bool operator < (Event x);
 
 protected:

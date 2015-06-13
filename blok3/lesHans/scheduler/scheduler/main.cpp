@@ -1,27 +1,23 @@
 #include "event.h"
 #include "scheduler.h"
+#include "MidiNote.h"
+#include "noteOff.h"
 
 using namespace std;
 
-double sampleClock() {
-	static double val = 0.0;
-	double res = val;val +=0.001;
-	return res;
-}
-
-
 int main() {
     
-    Scheduler scheduler(sampleClock);
+    Scheduler scheduler(secondsClock);
     EventPtr ev;
-
-    scheduler.show();
+    
     for (int i=0; i<5; i++) {
-        ev = new Event(1.0*i);
+        double time = 5*i;
+        ev = new MidiNote(time,1,rand()%128,127,100);
         scheduler.post(ev);
         ev->showTiming();
     }
-    scheduler.show();
     
-	return 0;
+    while(scheduler.run() > 0);
+    
+    return 0;
 }

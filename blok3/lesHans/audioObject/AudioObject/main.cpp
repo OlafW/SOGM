@@ -15,7 +15,7 @@ int main(int argc, const char * argv[])
 {
     audioObj A;
     
-    for (int i=0; i<5; i++) {
+    for (int i=0; i<5; i++) {   //Connect some audioObjPtr's for testing
         audioObjPtr x;
         A.connectA(x);
     }
@@ -23,11 +23,11 @@ int main(int argc, const char * argv[])
     WaveTable sinus;
     sinus.init();
     
-    double* data = new double[SIZE*2];
+    double data[SIZE*2];
     float rate = 0.5;
     
     for (unsigned long i=0; i<SIZE; i++) {
-        data[i] = sinus.linearInterp(i*rate);
+        data[i] = sinus.linearInterp(i*rate);   //Fill wavetable with interpolated sine function (half the rate)
     }
 
     return 0;

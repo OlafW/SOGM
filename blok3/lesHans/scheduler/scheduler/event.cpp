@@ -2,6 +2,7 @@
 
 long Event::number = 0;
 
+
 Event::Event(double time) {
 	ID = number++;
 	this->time = time;
@@ -26,7 +27,18 @@ Event::~Event() {
 	}
 }
 
-EventPtr Event::insert(EventPtr ev) {
+EventPtr Event::prepend(EventPtr ev) {
+	ev->next = this;	//Next of new event becomes this
+    ev->prev = this->prev;  //Prev of new event becomes previous of this event
+	if (prev) {
+		prev->next = ev;	//Next of prev becomes new event
+	}
+	prev = ev;	//This prev becomes new event
+	ev->next = this; //Next of new event becomes this
+	return ev;
+}
+
+EventPtr Event::append(EventPtr ev) {
 	ev->next = next;	//Next of new event becomes this next
 	if (next) {
 		next->prev = ev;	//Prev of next becomes new event
@@ -67,18 +79,6 @@ void Event::showTiming() {
 void Event::doIt() {
 	cout << "Event::doit() " << endl;
 	show();
-}
-
-EventPtr Event::prevEventPtr() {
-	return prev;
-}
-
-EventPtr Event::nextEventPtr() {
-	return next;
-}
-
-bool Event::GEthan(Event x) {	//a.GEthan(x) means a.(>=)(x)
-	return (time >= x.time);
 }
 
 bool Event::operator >= (Event x) {	// a >= x; means a.(>=)(x)

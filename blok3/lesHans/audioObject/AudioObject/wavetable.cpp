@@ -12,6 +12,11 @@
 WaveTable::WaveTable() {
     size = SIZE+1;  //Size +1 because you want to interpolate the last value of the buffer
     data = new double[size];
+    
+    if (!data) {
+        size = 0;
+        cout << "Error allocating memory" << endl;
+    }
 }
 
 WaveTable::~WaveTable() {
@@ -21,6 +26,11 @@ WaveTable::~WaveTable() {
 WaveTable::WaveTable(long size) {
     this->size = size+1;
     data = new double[size];
+    
+    if (!data) {
+        size = 0;
+        cout << "Error allocating memory" << endl;
+    }
 }
 
 void WaveTable::init() {

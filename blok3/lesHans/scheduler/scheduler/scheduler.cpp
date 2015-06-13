@@ -1,7 +1,7 @@
 #include "scheduler.h"
 #include <ctime>
 
-Scheduler::Scheduler(double (*fp)()) {	//Constructor needs clock function
+Scheduler::Scheduler(double (*fp)()) {
 	clock = fp;
 	start = end = last = NULL;
 	tStart = tEnd = tLast = 0.0;
@@ -13,14 +13,6 @@ Scheduler::~Scheduler() {
 	cout << " In Scheduler::~Scheduler()" << endl;
 	flush();
 	cout << " Scheduler is destructed" << endl;
-}
-
-long Scheduler::pending() {
-	return total;
-}
-
-void Scheduler::showInfo(bool val) {
-	showInfoFlag = val;
 }
 
 void Scheduler::show() {
@@ -40,14 +32,27 @@ void Scheduler::show() {
 EventPtr Scheduler::post(EventPtr toPost) {
 	EventPtr res = NULL;
 	double t1, t2, t3;
-	toPost->myScheduler = this; //Scheduler of to post event is this one
+	toPost->myScheduler = this; //Scheduler of toPost event is this one
 
-	if (toPost->time <tStart) {
+	if (toPost->time <tStart && toPost->time < _localTime) {    //Event has to run immediately
 		cout << "Immediate doit()" << endl;
 		toPost->doIt();
+        tStart = toPost->time;
 		delete toPost;
 		return NULL;
 	}
+    if (toPost->time <tStart && toPost->time > _localTime) {    //Event has to run immediately but local time < event time: put event in queue
+        if (start) {
+            EventPtr temp = start;
+            start = toPost; toPost->next = temp;
+            temp->prev = start;
+            tStart = toPost->time;
+            tLast = tStart;
+            last = toPost;
+            total++;
+        }
+        return start;
+    }
 
 	t1 = toPost->time - tStart;	//Distance from first element
 	t2 = toPost->time - tLast;	//Distance from last inserted element
@@ -67,31 +72,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		}
 		return start;
 	}
-
-	if (total <=1) {	//CASE 2: Queue has 1 element
-		if (toPost->time >= tStart) {	//Insert after first element
-			start->insert(toPost);
-			last = toPost;
-			end = toPost;
-			tLast = tEnd = toPost->time;
-			total++;
-			if (showInfoFlag) cout << "Inserted as last of 2 elements" << endl;
-			if(showInfoFlag) show();
-			return start;
-		}	else {	//Insert before first element
-				start = toPost;
-				toPost->next = last;
-				last->prev = start;
-				tStart = toPost->time;
-				tLast = toPost->time;
-				last = toPost;
-				total++;
-				if (showInfoFlag) cout << "Inserted as first of 2 elements" << endl;
-				if(showInfoFlag) show();
-				return start;
-		}
-	}
-	//CASE 3: Queue has 2 elements or more
+	//CASE 2: Queue has 1 element or more
 	if (toPost->time < start->time) {	//Insert before first element
 			EventPtr temp = start;
 			start = toPost; toPost->next = temp;
@@ -105,7 +86,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 			return start;
 	}
 	if (toPost->time >= tEnd) {	//Insert after last element
-		end->insert(toPost);
+		end->append(toPost);
 		last = end = toPost;
 		tLast = tEnd = toPost->time;
 		total++;
@@ -117,7 +98,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		res = start;
 		while (res->next && res->next->time < toPost->time) res = res->next;	//searching
 		if (res) {
-			res->insert(toPost);
+			res->append(toPost);
 			last = toPost;
 			tLast = toPost->time;
 			total++;
@@ -129,7 +110,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 	if (t3 <= t2) { //toPost time closest to end, search backwards from there
 		res = end;
 		while(res->prev && res->time > toPost->time) res = res->prev;
-		res->insert(toPost);
+		res->append(toPost);
 		tLast = toPost->time;
 		last = toPost;
 		total ++;
@@ -138,9 +119,9 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		return res;
 	}
 	res = last;
-	if (toPost->time >= res->time) {//toPost closest to last inserted, searching forward from there
+	if (toPost->time >= res->time) {    //toPost closest to last inserted, searching forward from there
 		while(res->next && toPost->time > res->next->time)	res = res->next;
-		res->insert(toPost);
+		res->append(toPost);
 		tLast = toPost->time;
 		last = toPost;
 		total++;
@@ -150,7 +131,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 	}
 	if (toPost->time <= res->time) {//toPost closest to last inserted, searching backward from there
 		while (res->prev && toPost->time < res->time)	res = res->prev;
-		res->insert(toPost);
+		res->append(toPost);
 		tLast = toPost->time;
 		last = toPost;
 		total++;
@@ -158,7 +139,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		if(showInfoFlag) show();
 		return res;
 	}
-	cout << "••••••••••••••• ERR: not inserted ! " << endl;
+	cout << "Error: Event not inserted ! " << endl;
 	cout << "t1: " << t1 << " \t t2: " << t2 << " \t t3: " << t3 << endl;
 	return NULL;
 
@@ -171,10 +152,10 @@ EventPtr Scheduler::post(Event &aNew) {
 	return ev;
 }
 
-long Scheduler::p() {
+long Scheduler::run() { //Run the scheduler
 	EventPtr temp;
     double t = clock();
-    while (start && start->time <= t) {
+    while (start && start->time <= t) { //Check if event has to run
         temp = start;
         cout << "\nat: " << t << " ";
         temp->doIt();
@@ -183,47 +164,6 @@ long Scheduler::p() {
         total --;
     }
 	return total;
-}
-
-
-double Scheduler::localTime() {
-	return _localTime;
-}
-
-double Scheduler::maxTime() {
-	return tEnd;
-}
-
-double Scheduler::Tstart() {
-	return tStart;
-}
-
-double Scheduler::Tend() {
-	return tEnd;
-}
-
-double Scheduler::Tlast() {
-	return tLast;
-}
-
-EventPtr Scheduler::Start() {
-	return start;
-}
-
-EventPtr Scheduler::End() {
-	return end;
-}
-
-EventPtr Scheduler::Last() {
-	return last;
-}
-
-void Scheduler::setLocalTime(double val) {
-	_localTime = val;
-}
-
-double Scheduler::advance(double delta) {
-	return delta;
 }
 
 void Scheduler::flush() {
@@ -238,9 +178,37 @@ void Scheduler::flush() {
     }
 }
 
-double Scheduler::secondsClock() {
+//Global clock funtions
+double sampleClock() {
+	static double val = 0.0;
+	double res = val;val +=0.001;
+	return res;
+}
+
+double secondsClock(){
     static bool first = true;
     double t = clock();
-    //HIER GEBLEVEN
+    static double offset;
+    static double systemticks = CLOCKS_PER_SEC;
+    static double lastT = 0.0;
+    if(first){
+        offset = t/systemticks;
+        first = false;
+        cout << "secondsClock initialised, offset: " <<  offset << endl;
+        cout << "systemticks: " << systemticks << endl;
+    }
+    t = t/systemticks;
+    t -= offset;
+    static int cntr  = 0;
+    if(t == long(t) || t - lastT >= 0.1){
+        lastT = t;
+        if(cntr <= 0) cout << "t: " << t;
+        cout << "."; cout.flush();
+        cntr ++;
+        if(cntr >= 10){
+            cout << endl;
+            cntr = 0;
+        }
+    }
     return t;
 }
