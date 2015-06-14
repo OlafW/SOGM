@@ -13,17 +13,8 @@ Event::~Event() {
 	if (next) {
 		 next->prev = prev;	//Delete this, next->prev is this->prev
 	}
-	else {
-		cout << "Last in queue?" << endl;
-	}
 	if (prev) {
 		 prev->next = next; //Delete this, prev->next is this->next
-	}
-	else {
-		cout << "First in queue?" << endl;
-	}
-	if (prev != NULL) {
-		cout << "Execution of non first event" << endl;
 	}
 }
 
@@ -35,6 +26,7 @@ EventPtr Event::prepend(EventPtr ev) {
 	}
 	prev = ev;	//This prev becomes new event
 	ev->next = this; //Next of new event becomes this
+
 	return ev;
 }
 
@@ -45,19 +37,21 @@ EventPtr Event::append(EventPtr ev) {
 	}
 	next = ev;	//This next becomes new event
 	ev->prev = this; //Prev of new event becomes this
+    
 	return ev;
 }
 
 void Event::show() {
-	cout << "Own ID: " << this->ID << endl;
-	cout << "Own time :" << time << endl;
+	cout << "ID: " << this->ID << endl;
+	cout << "Time :" << time << endl;
 
 	if (prev) {
-		cout << "ID of previous: " << prev->ID << endl;
+		cout << "Prev ID: " << prev->ID << endl;
 	}
 	if (next) {
-		cout << "ID of next: " << next->ID << endl;
+		cout << "Next ID: " << next->ID << endl;
 	}
+    cout << "--------------------" << endl;
 }
 
 void Event::showTiming() {
@@ -74,6 +68,7 @@ void Event::showTiming() {
 	else {
 		cout << "No next, next: NULL" << endl;
 	}
+    cout << "--------------------" << endl;
 }
 
 void Event::doIt() {
@@ -81,10 +76,10 @@ void Event::doIt() {
 	show();
 }
 
-bool Event::operator >= (Event x) {	// a >= x; means a.(>=)(x)
+bool Event::operator >= (Event x) {
 	return (time >= x.time);
 }
 
-bool Event::operator < (Event x) {	// a < x; means a.(<)(x)
+bool Event::operator < (Event x) {
 	return (time < x.time);
 }

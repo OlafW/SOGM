@@ -6,7 +6,6 @@ Scheduler::Scheduler(double (*fp)()) {
 	start = end = last = NULL;
 	tStart = tEnd = tLast = 0.0;
 	total = 0;
-	showInfoFlag = false;
 }
 
 Scheduler::~Scheduler() {
@@ -16,7 +15,6 @@ Scheduler::~Scheduler() {
 }
 
 void Scheduler::show() {
-	if(!showInfoFlag) return;
 	if(start) {
 			cout << "\nScheduler has now:" << endl;
 			EventPtr ev = start;
@@ -41,11 +39,12 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		delete toPost;
 		return NULL;
 	}
-    if (toPost->time <tStart && toPost->time > _localTime) {    //Event has to run immediately but local time < event time: put event in queue
+    if (toPost->time <tStart && toPost->time > _localTime) {    //Event has to run immediately but local time < event time: Put event in queue
         if (start) {
-            EventPtr temp = start;
-            start = toPost; toPost->next = temp;
-            temp->prev = start;
+            start = toPost;
+            toPost->next = last;
+            last->prev = start;
+            
             tStart = toPost->time;
             tLast = tStart;
             last = toPost;
@@ -66,23 +65,20 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		start = end = last = toPost;	//Posted event is all there is
 		tStart = tLast = tEnd = toPost->time;
 		total ++;
-		if(showInfoFlag) {
-			cout << "Inserted in empty queue" << endl;
-			show();
-		}
+
 		return start;
 	}
 	//CASE 2: Queue has 1 element or more
 	if (toPost->time < start->time) {	//Insert before first element
-			EventPtr temp = start;
-			start = toPost; toPost->next = temp;
-			temp->prev = start;
+            start = toPost;
+            toPost->next = last;
+            last->prev = start;
+    
 			tStart = toPost->time;
 			tLast = tStart;
 			last = toPost;
 			total++;
-			if (showInfoFlag) cout << "Inserted as first element" << endl;
-			if (showInfoFlag) show();
+
 			return start;
 	}
 	if (toPost->time >= tEnd) {	//Insert after last element
@@ -90,8 +86,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		last = end = toPost;
 		tLast = tEnd = toPost->time;
 		total++;
-		if (showInfoFlag) cout << "Inserted as last element" << endl;
-		if (showInfoFlag) show();
+
 		return end;
 	}
 	if (t1 <= t2) {	//toPost time closest to start, search forwards from there
@@ -102,8 +97,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 			last = toPost;
 			tLast = toPost->time;
 			total++;
-			if(showInfoFlag) cout << "Inserted searching from the end" << endl;
-			if(showInfoFlag) show();
+
 			return res;
 		}
 	}
@@ -114,8 +108,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		tLast = toPost->time;
 		last = toPost;
 		total ++;
-		if(showInfoFlag)cout << "Inserted searching from the end" << endl;
-		if(showInfoFlag) show();
+
 		return res;
 	}
 	res = last;
@@ -125,8 +118,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		tLast = toPost->time;
 		last = toPost;
 		total++;
-		if(showInfoFlag)cout << "Inserted searching forward from the last inserted element" << endl;
-		if(showInfoFlag) show();
+
 		return res;
 	}
 	if (toPost->time <= res->time) {//toPost closest to last inserted, searching backward from there
@@ -135,8 +127,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		tLast = toPost->time;
 		last = toPost;
 		total++;
-		if(showInfoFlag)cout << "Inserted searching backward from the last inserted element" << endl;
-		if(showInfoFlag) show();
+
 		return res;
 	}
 	cout << "Error: Event not inserted ! " << endl;
@@ -157,11 +148,11 @@ long Scheduler::run() { //Run the scheduler
     double t = clock();
     while (start && start->time <= t) { //Check if event has to run
         temp = start;
-        cout << "\nat: " << t << " ";
-        temp->doIt();
-        start = start->next;
+        cout << "\nAt t: " << t << " ";
+        temp->doIt();   //Execute the event
+        start = start->next; //Go to next event in queue
         delete temp;
-        total --;
+        total --; //Queue size -1
     }
 	return total;
 }

@@ -28,7 +28,6 @@ private:
 	double _localTime;	//Time of this Scheduler
 	long total;	//Total of events in queue
 	double (*clock)();	//Function pointer to a clock funtion
-	bool showInfoFlag;
 };
 
 #endif

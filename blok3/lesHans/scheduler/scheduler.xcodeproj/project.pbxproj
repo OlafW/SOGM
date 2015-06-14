@@ -10,8 +10,7 @@
 		EB4599821B161CA10036E595 /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB4599811B161CA10036E595 /* event.cpp */; };
 		EB4599861B161CA90036E595 /* scheduler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB4599841B161CA90036E595 /* scheduler.cpp */; };
 		EB4599881B161CC40036E595 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB4599871B161CC40036E595 /* main.cpp */; };
-		EB96CBD01B25A162003E6837 /* MidiNote.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB96CBCE1B25A162003E6837 /* MidiNote.cpp */; };
-		EB9993811B2B823C008A284A /* noteOff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB99937F1B2B823C008A284A /* noteOff.cpp */; };
+		EB4A71651B2CCBA10092A2B7 /* midiEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB4A71631B2CCBA10092A2B7 /* midiEvent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,10 +32,8 @@
 		EB4599841B161CA90036E595 /* scheduler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scheduler.cpp; sourceTree = "<group>"; };
 		EB4599851B161CA90036E595 /* scheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scheduler.h; sourceTree = "<group>"; };
 		EB4599871B161CC40036E595 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		EB96CBCE1B25A162003E6837 /* MidiNote.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiNote.cpp; sourceTree = "<group>"; };
-		EB96CBCF1B25A162003E6837 /* MidiNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiNote.h; sourceTree = "<group>"; };
-		EB99937F1B2B823C008A284A /* noteOff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = noteOff.cpp; sourceTree = "<group>"; };
-		EB9993801B2B823C008A284A /* noteOff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = noteOff.h; sourceTree = "<group>"; };
+		EB4A71631B2CCBA10092A2B7 /* midiEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midiEvent.cpp; sourceTree = "<group>"; };
+		EB4A71641B2CCBA10092A2B7 /* midiEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midiEvent.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,10 +71,8 @@
 				EB4599811B161CA10036E595 /* event.cpp */,
 				EB4599851B161CA90036E595 /* scheduler.h */,
 				EB4599841B161CA90036E595 /* scheduler.cpp */,
-				EB96CBCF1B25A162003E6837 /* MidiNote.h */,
-				EB96CBCE1B25A162003E6837 /* MidiNote.cpp */,
-				EB9993801B2B823C008A284A /* noteOff.h */,
-				EB99937F1B2B823C008A284A /* noteOff.cpp */,
+				EB4A71641B2CCBA10092A2B7 /* midiEvent.h */,
+				EB4A71631B2CCBA10092A2B7 /* midiEvent.cpp */,
 			);
 			path = scheduler;
 			sourceTree = "<group>";
@@ -133,11 +128,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB9993811B2B823C008A284A /* noteOff.cpp in Sources */,
 				EB4599821B161CA10036E595 /* event.cpp in Sources */,
 				EB4599861B161CA90036E595 /* scheduler.cpp in Sources */,
 				EB4599881B161CC40036E595 /* main.cpp in Sources */,
-				EB96CBD01B25A162003E6837 /* MidiNote.cpp in Sources */,
+				EB4A71651B2CCBA10092A2B7 /* midiEvent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

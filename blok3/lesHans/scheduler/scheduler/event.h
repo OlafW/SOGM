@@ -15,12 +15,12 @@ friend class Scheduler;     //Friend of Event, Event can access Scheduler's elem
 
 public:
 	Event(double time); //Constructor with timeStamp
-	~Event();
+	virtual ~Event();
     EventPtr prepend(EventPtr ev);
 	EventPtr append(EventPtr ev);
 	void show();
 	void showTiming();
-	virtual void doIt();    //Overrided by inheriting class
+	virtual void doIt();  //Overrided by inheriting class
 
 	bool operator >= (Event x); //Operator overloading
 	bool operator < (Event x);
