@@ -16,10 +16,6 @@ MidiNote::MidiNote(double time, int channel, int key, int vel, double duration) 
     this->duration = duration;
 }
 
-MidiNote::~MidiNote() {
-    
-}
-
 void MidiNote::doIt() {
     cout << "MIDIEvent NoteOn, Key: "<< key << " Velocity: " << vel << " Duration: " << duration << endl;
     show();

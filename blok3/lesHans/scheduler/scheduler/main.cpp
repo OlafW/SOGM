@@ -11,9 +11,10 @@ int main() {
     Scheduler scheduler(secondsClock);
     EventPtr ev;
     
-    for (int i=0; i<3; i++) {
+    for (int i=0; i<10; i++) {
         double time;
-        time = (rand()%10000) / 1000.0;
+        time = (rand()%100);
+        time /= 10;
         ev = new MidiNote(time,1,rand()%128,127,500);   //Insert some MIDI events
         scheduler.post(ev);
         ev->showTiming();

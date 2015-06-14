@@ -6,6 +6,7 @@ Scheduler::Scheduler(double (*fp)()) {
 	start = end = last = NULL;
 	tStart = tEnd = tLast = 0.0;
 	total = 0;
+    localTime = clock();
 }
 
 Scheduler::~Scheduler() {
@@ -30,26 +31,24 @@ void Scheduler::show() {
 EventPtr Scheduler::post(EventPtr toPost) {
 	EventPtr res = NULL;
 	double t1, t2, t3;
-	toPost->myScheduler = this; //Scheduler of toPost event is this one
+	toPost->myScheduler = this; //Scheduler of toPost event is this one    
+    localTime = clock();
 
-	if (toPost->time <tStart && toPost->time < _localTime) {    //Event has to run immediately
-		cout << "Immediate doit()" << endl;
+	if (toPost->time <tStart && toPost->time <= localTime) {    //Event has to run immediately
+        cout << "Immediate doit()" << endl;
 		toPost->doIt();
-        tStart = toPost->time;
 		delete toPost;
 		return NULL;
 	}
-    if (toPost->time <tStart && toPost->time > _localTime) {    //Event has to run immediately but local time < event time: Put event in queue
-        if (start) {
-            start = toPost;
-            toPost->next = last;
-            last->prev = start;
-            
-            tStart = toPost->time;
-            tLast = tStart;
-            last = toPost;
-            total++;
-        }
+    if (toPost->time <tStart && toPost->time > localTime) {    //Event has to run immediately but local time < event time: Put event in queue
+        EventPtr temp = start;
+        start = toPost; toPost->next = temp;
+        temp->prev = start;
+        tStart = toPost->time;
+        tLast = tStart;
+        last = toPost;
+        total ++;
+        
         return start;
     }
 
@@ -65,21 +64,19 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		start = end = last = toPost;	//Posted event is all there is
 		tStart = tLast = tEnd = toPost->time;
 		total ++;
-
 		return start;
 	}
 	//CASE 2: Queue has 1 element or more
 	if (toPost->time < start->time) {	//Insert before first element
-            start = toPost;
-            toPost->next = last;
-            last->prev = start;
-    
-			tStart = toPost->time;
-			tLast = tStart;
-			last = toPost;
-			total++;
+        EventPtr temp = start;
+        start = toPost; toPost->next = temp;
+        temp->prev = start;
+        tStart = toPost->time;
+        tLast = tStart;
+        last = toPost;
+        total ++;
 
-			return start;
+        return start;
 	}
 	if (toPost->time >= tEnd) {	//Insert after last element
 		end->append(toPost);
@@ -96,6 +93,7 @@ EventPtr Scheduler::post(EventPtr toPost) {
 			res->append(toPost);
 			last = toPost;
 			tLast = toPost->time;
+            if(last == res) last = toPost;
 			total++;
 
 			return res;
@@ -145,10 +143,10 @@ EventPtr Scheduler::post(Event &aNew) {
 
 long Scheduler::run() { //Run the scheduler
 	EventPtr temp;
-    double t = clock();
-    while (start && start->time <= t) { //Check if event has to run
+    localTime = clock();    //Get the time
+    while (start && start->time <= localTime) { //Check if event has to run
         temp = start;
-        cout << "\nAt t: " << t << " ";
+        cout << "\nAt t: " << localTime << " ";
         temp->doIt();   //Execute the event
         start = start->next; //Go to next event in queue
         delete temp;

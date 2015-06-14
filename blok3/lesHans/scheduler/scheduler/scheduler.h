@@ -25,7 +25,7 @@ private:
 	double tStart;	//Timestamp of first element
 	double tEnd;	//Timestamp of last element
 	double tLast;	//Timestamp of last inserted element
-	double _localTime;	//Time of this Scheduler
+	double localTime;	//Time of this Scheduler
 	long total;	//Total of events in queue
 	double (*clock)();	//Function pointer to a clock funtion
 };

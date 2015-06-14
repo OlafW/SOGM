@@ -22,7 +22,6 @@ typedef noteOff* noteOffPtr;
 class MidiNote : public Event {
 public:
     MidiNote(double time, int channel, int key, int vel, double duration);
-    ~MidiNote();
     void doIt();
     double getDuration();
     
