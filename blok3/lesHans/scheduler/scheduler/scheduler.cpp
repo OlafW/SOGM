@@ -40,17 +40,6 @@ EventPtr Scheduler::post(EventPtr toPost) {
 		delete toPost;
 		return NULL;
 	}
-    if (toPost->time <tStart && toPost->time > localTime) {    //Event has to run immediately but local time < event time: Put event in queue
-        EventPtr temp = start;
-        start = toPost; toPost->next = temp;
-        temp->prev = start;
-        tStart = toPost->time;
-        tLast = tStart;
-        last = toPost;
-        total ++;
-        
-        return start;
-    }
 
 	t1 = toPost->time - tStart;	//Distance from first element
 	t2 = toPost->time - tLast;	//Distance from last inserted element

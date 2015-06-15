@@ -50,7 +50,7 @@ bool audioObj::connectA(audioObjPtr aPtr) { //Insert a new audioObject in inA
         if (inA) delete[] inA;  //Delete old array
         inA = temp; //inA now points to the new array
         sizeA = newSize;    //Size is now the new size
-        cout << newSize << endl;
+        cout << "New size: " << newSize << endl;
     }
     inA[numA] = aPtr; //Insert the new audioObject
     numA ++;    //Number of pointers += 1

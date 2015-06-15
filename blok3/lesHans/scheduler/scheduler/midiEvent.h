@@ -30,8 +30,6 @@ private:
     int key;
     int vel;
     double duration;
-    noteOffPtr off;
-    bool isPlaying;
 };
 
 
@@ -46,7 +44,6 @@ private:
     int key;
     int vel;
     double duration;
-    bool isPlaying;
 };
 
 #endif /* defined(__scheduler__midiEvent__) */

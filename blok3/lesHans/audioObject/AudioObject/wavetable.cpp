@@ -40,11 +40,11 @@ void WaveTable::init() {
 }
 
 double WaveTable::linearInterp(double lookup) {
-    int temp = int(lookup); //Truncated value of lookup
-    double interp = lookup - temp;  //Percentage
+    int index = int(lookup); //Truncated value of lookup
+    double interp = lookup - index;  //Percentage
     double val = 0;
     
-    val =  data[temp] * (1-interp) +  data[temp+1] * interp;   //linear interpolation
+    val =  data[index] * (1-interp) +  data[index+1] * interp;   //linear interpolation
     
     return val;
 }
