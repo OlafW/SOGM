@@ -19,11 +19,8 @@ MidiNote::MidiNote(double time, int channel, int key, int vel, double duration) 
 void MidiNote::doIt() {
     cout << "MIDIEvent NoteOn, Key: "<< key << " Velocity: " << vel << " Duration: " << duration << endl;
     
-    noteOffPtr temp = new noteOff(time,channel,key,vel,duration);   //Note on event triggers a note off event
-    temp->doIt();
-    delete temp;
-    
-    show();
+    noteOffPtr ev = new noteOff(time+duration,channel,key,vel,duration);   //Note on event triggers a note off event
+    myScheduler->post(ev);
 }
 
 double MidiNote::getDuration() {

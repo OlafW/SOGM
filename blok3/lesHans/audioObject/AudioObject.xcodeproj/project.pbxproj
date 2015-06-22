@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		EB7F149B1AF2805B00591C86 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB7F149A1AF2805B00591C86 /* main.cpp */; };
 		EB7F14A51AF2808300591C86 /* audioObj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB7F14A31AF2808300591C86 /* audioObj.cpp */; };
-		EB96CBCD1B259639003E6837 /* wavetable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB96CBCB1B259639003E6837 /* wavetable.cpp */; };
+		EB96CBCD1B259639003E6837 /* waveTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB96CBCB1B259639003E6837 /* waveTable.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,8 +29,8 @@
 		EB7F149A1AF2805B00591C86 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		EB7F14A31AF2808300591C86 /* audioObj.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audioObj.cpp; sourceTree = "<group>"; };
 		EB7F14A41AF2808300591C86 /* audioObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audioObj.h; sourceTree = "<group>"; };
-		EB96CBCB1B259639003E6837 /* wavetable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wavetable.cpp; sourceTree = "<group>"; };
-		EB96CBCC1B259639003E6837 /* wavetable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wavetable.h; sourceTree = "<group>"; };
+		EB96CBCB1B259639003E6837 /* waveTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = waveTable.cpp; sourceTree = "<group>"; };
+		EB96CBCC1B259639003E6837 /* waveTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = waveTable.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +66,8 @@
 				EB7F149A1AF2805B00591C86 /* main.cpp */,
 				EB7F14A41AF2808300591C86 /* audioObj.h */,
 				EB7F14A31AF2808300591C86 /* audioObj.cpp */,
-				EB96CBCC1B259639003E6837 /* wavetable.h */,
-				EB96CBCB1B259639003E6837 /* wavetable.cpp */,
+				EB96CBCC1B259639003E6837 /* waveTable.h */,
+				EB96CBCB1B259639003E6837 /* waveTable.cpp */,
 			);
 			path = AudioObject;
 			sourceTree = "<group>";
@@ -124,7 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB7F14A51AF2808300591C86 /* audioObj.cpp in Sources */,
-				EB96CBCD1B259639003E6837 /* wavetable.cpp in Sources */,
+				EB96CBCD1B259639003E6837 /* waveTable.cpp in Sources */,
 				EB7F149B1AF2805B00591C86 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

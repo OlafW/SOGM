@@ -11,12 +11,14 @@
 
 #include <iostream>
 #include "event.h"
+#include "scheduler.h"
 
 //Forward declarations
 class MidiNote;
 
 class noteOff;
 typedef noteOff* noteOffPtr;
+
 
 //Midi NoteOn class
 class MidiNote : public Event {

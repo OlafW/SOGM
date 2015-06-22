@@ -1,13 +1,13 @@
 //
-//  wavetable.h
+//  waveTable.h
 //  WaveTable
 //
 //  Created by Olaf Wisselink on 21-05-15.
 //  Copyright (c) 2015 olaf. All rights reserved.
 //
 
-#ifndef __WaveTable__wavetable__
-#define __WaveTable__wavetable__
+#ifndef __WaveTable__waveTable__
+#define __WaveTable__waveTable__
 
 #include <iostream>
 #include "math.h"
@@ -24,8 +24,8 @@ public:
     double linearInterp(double lookup);
     
 private:
-    double* data;   //data of wavetable
-    long size;  //size of wavetable
+    double* data;   //Data of wavetable
+    long size;  //Size of wavetable
     int sampleRate;
 };
 

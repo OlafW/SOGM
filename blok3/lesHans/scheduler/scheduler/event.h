@@ -27,11 +27,11 @@ public:
 
 protected:
 	double time; //timeStamp of event
+    SchedulerPtr myScheduler;	//Scheduler for this event
 
 private:
 	static long number;
 	long ID; //ID = number
-	SchedulerPtr myScheduler;	//Scheduler for this event
 	EventPtr prev; //Pointer to previous in queue
 	EventPtr next; //Pointer to next in queue
 };

@@ -1,12 +1,12 @@
 //
-//  wavetable.cpp
+//  waveTable.cpp
 //  WaveTable
 //
 //  Created by Olaf Wisselink on 21-05-15.
 //  Copyright (c) 2015 olaf. All rights reserved.
 //
 
-#include "wavetable.h"
+#include "waveTable.h"
 
 
 WaveTable::WaveTable() {
