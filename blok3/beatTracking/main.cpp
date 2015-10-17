@@ -1,15 +1,18 @@
-#include <fstream>
 #include "audio_io.h"
 #include "sndfile_io.h"
 #include "beattracking.h"
 
 #define SAMPLERATE	44100
 #define CHANNELS	1
-#define N  1024 // Framesize
+#define N  1024     // Framesize
+
 
 int main(int argc, char** argv) {
-    // float* buffer = new float[N];
-    // Start audiostream
+    float* buffer = new float[N];
+    float peakThreshold = 0.968;
+    int step = 64;
+
+    // //Start audiostream
     // Audio_IO audioStream(SAMPLERATE, CHANNELS);
     // int input_device;
     // audioStream.set_mode(AUDIO_IO_READONLY);
@@ -25,32 +28,23 @@ int main(int argc, char** argv) {
     SNDFile sndfile;
     sndfile.readFile("./testsig.wav");
     unsigned long bufSize = sndfile.getBufferSize();
-    int step = 64;
-    float threshold = 0.968;
 
-    float* y = autoCorrelate(sndfile.getBuffer(), bufSize, step);
-    float period = findPeriod(y, bufSize, threshold);
+    float* x_norm = normalize(sndfile.getBuffer(), bufSize);
+    float* y = autoCorrelate(x_norm, bufSize, step);
+    float period = findPeriod(y, bufSize, peakThreshold);
     float bpm = 1.0 / (period / SAMPLERATE) * 60;
     std::cout << "BPM: " << bpm << std::endl;
 
-    std::ofstream plot;
-    plot.open("plot.txt");
-    for (int i=0; i<N; i++) {
-        plot << y[i] << std::endl;
-    }
-
-    plot.close();
     //audioStream.finalise();
-    //delete[] buffer;
+    delete[] buffer;
+    delete[] x_norm;
     delete[] y;
     return 0;
 }
 
 /*
-
 make
 beatTracker
 gnuplot
-plot "plot.txt" with lines
-
+plot "peaks.txt" with lines
 */
