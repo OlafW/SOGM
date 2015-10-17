@@ -20,7 +20,7 @@
 *
 *  File name     : audio_io.cpp
 *  System name   : audio_io / Portaudio
-* 
+*
 *  Description   : C++ class for Portaudio
 *
 *  Author        : Marc Groenewegen
@@ -248,5 +248,3 @@ void Audio_IO::finalise()
 
     Pa_Terminate();
 } // finalise()
-
-
