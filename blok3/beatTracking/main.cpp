@@ -28,8 +28,7 @@ int main(int argc, char** argv) {
     int step = 64;
     float threshold = 0.62;
 
-    float *y = normalize(sndfile.getBuffer(), bufSize);
-    y = autoCorrelate(sndfile.getBuffer(), bufSize, step);
+    float* y = autoCorrelate(sndfile.getBuffer(), bufSize, step);
     float period = findPeriod(y, bufSize/step, threshold);
     std::cout << "Period in samples: " << period << std::endl;
     std::cout << "Period (s): " << period / SAMPLERATE << std::endl;
