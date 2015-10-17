@@ -3,15 +3,12 @@
 float* autoCorrelate(float* x, unsigned long N, int step) {
     float *y = new float[N];
     float sum;
-    int count_i = 0, count_j = 0;
 
     for (unsigned long i=0; i<N; i+=step) {
         sum = 0;
         for (unsigned long j=0; j<N-i; j+=step) {
             sum += x[j] * x[j+i];
-            if (j > count_j) count_j = j;
         }
-        count_i = i;
         sum = sqrt(sum*sum);    //Absolute value
         y[i] = sum / (N-i); //Normalise
     }
