@@ -1,15 +1,16 @@
 CC = g++
+CFLAGS = -I/usr/local/include -Wall -I../include
 LDFLAGS= -L/usr/local/lib -lportaudio -lsndfile
 
-OBJ= main.o beattracking.o sndfile_io.o
+OBJ= main.o beattracking.o sndfile_io.o audio_io.o
 
 all: beatTracker
 
 beatTracker: $(OBJ)
-	$(CC) -o $@ $(OBJ) $(LDFLAGS)
+	$(CC) -o $@ $(CFLAGS) $(OBJ) $(LDFLAGS)
 
 .cpp.o:
-	$(CC) $< -c
+	$(CC) $< -c $(CFLAGS)
 
 clean:
 	rm -f *.o

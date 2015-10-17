@@ -20,7 +20,7 @@
 *
 *  File name     : audio_io.h
 *  System name   : Audio I/O
-* 
+*
 *  Description   : Audio input and output header file
 *		   Wrapper class for portaudio
 *
@@ -105,4 +105,3 @@ private:
 
 
 #endif // _AUDIO_IO_H_
-

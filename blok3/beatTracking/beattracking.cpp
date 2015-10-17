@@ -1,16 +1,34 @@
 #include "beattracking.h"
 
+float* normalize(float* x, unsigned long N) {
+    float* y = new float[N];
+    float max = 0;
+    float gain = 0;
+
+    for (unsigned long i=0; i<N; i++) {
+        float abs_x = sqrt(x[i]*x[i]);
+        if (abs_x > max) {
+            max = abs_x;
+        }
+    }
+    gain = 1.0 / max;
+    for (unsigned long i=0; i<N; i++) {
+        y[i] = x[i] * gain;
+    }
+    return y;
+}
+
 float* autoCorrelate(float* x, unsigned long N, int step) {
     float *y = new float[N/step];
     float sum;
 
     for (unsigned long i=0; i<N-step; i+=step) {
         sum = 0;
-        for (unsigned long j=0; j<N-i; j+=step) {
+        for (unsigned long j=0; j<N-i-step; j+=step) {
             sum += x[j] * x[j+i];
         }
         sum = sqrt(sum*sum);    //Absolute value
-        y[i] = sum / (N-i); //Normalise
+        y[i] = sum / (N-i-step); //Normalise
     }
     return y;
 }
@@ -45,5 +63,6 @@ float findPeriod(float* x, unsigned long N, float th) {
     }
     avgPeriod /= peakIndex.size();
 
+    peakIndex.clear();
     return avgPeriod;
 }
