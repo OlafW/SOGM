@@ -26,12 +26,12 @@ int main(int argc, char** argv) {
     sndfile.readFile("./testsig.wav");
     unsigned long bufSize = sndfile.getBufferSize();
     int step = 64;
-    float threshold = 0.62;
+    float threshold = 0.968;
 
     float* y = autoCorrelate(sndfile.getBuffer(), bufSize, step);
-    float period = findPeriod(y, bufSize/step, threshold);
-    std::cout << "Period in samples: " << period << std::endl;
-    std::cout << "Period (s): " << period / SAMPLERATE << std::endl;
+    float period = findPeriod(y, bufSize, threshold);
+    float bpm = 1.0 / (period / SAMPLERATE) * 60;
+    std::cout << "BPM: " << bpm << std::endl;
 
     std::ofstream plot;
     plot.open("plot.txt");
