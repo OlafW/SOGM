@@ -1,0 +1,243 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EB7F149B1AF2805B00591C86 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB7F149A1AF2805B00591C86 /* main.cpp */; };
+		EB7F14A51AF2808300591C86 /* audioObj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB7F14A31AF2808300591C86 /* audioObj.cpp */; };
+		EB96CBCD1B259639003E6837 /* waveTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB96CBCB1B259639003E6837 /* waveTable.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EB7F14951AF2805B00591C86 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		EB7F14971AF2805B00591C86 /* AudioObject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AudioObject; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB7F149A1AF2805B00591C86 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		EB7F14A31AF2808300591C86 /* audioObj.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audioObj.cpp; sourceTree = "<group>"; };
+		EB7F14A41AF2808300591C86 /* audioObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audioObj.h; sourceTree = "<group>"; };
+		EB96CBCB1B259639003E6837 /* waveTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = waveTable.cpp; sourceTree = "<group>"; };
+		EB96CBCC1B259639003E6837 /* waveTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = waveTable.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EB7F14941AF2805B00591C86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EB7F148E1AF2805B00591C86 = {
+			isa = PBXGroup;
+			children = (
+				EB7F14991AF2805B00591C86 /* AudioObject */,
+				EB7F14981AF2805B00591C86 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EB7F14981AF2805B00591C86 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB7F14971AF2805B00591C86 /* AudioObject */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB7F14991AF2805B00591C86 /* AudioObject */ = {
+			isa = PBXGroup;
+			children = (
+				EB7F149A1AF2805B00591C86 /* main.cpp */,
+				EB7F14A41AF2808300591C86 /* audioObj.h */,
+				EB7F14A31AF2808300591C86 /* audioObj.cpp */,
+				EB96CBCC1B259639003E6837 /* waveTable.h */,
+				EB96CBCB1B259639003E6837 /* waveTable.cpp */,
+			);
+			path = AudioObject;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EB7F14961AF2805B00591C86 /* AudioObject */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB7F14A01AF2805B00591C86 /* Build configuration list for PBXNativeTarget "AudioObject" */;
+			buildPhases = (
+				EB7F14931AF2805B00591C86 /* Sources */,
+				EB7F14941AF2805B00591C86 /* Frameworks */,
+				EB7F14951AF2805B00591C86 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AudioObject;
+			productName = AudioObject;
+			productReference = EB7F14971AF2805B00591C86 /* AudioObject */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EB7F148F1AF2805B00591C86 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = olaf;
+			};
+			buildConfigurationList = EB7F14921AF2805B00591C86 /* Build configuration list for PBXProject "AudioObject" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EB7F148E1AF2805B00591C86;
+			productRefGroup = EB7F14981AF2805B00591C86 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB7F14961AF2805B00591C86 /* AudioObject */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EB7F14931AF2805B00591C86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB7F14A51AF2808300591C86 /* audioObj.cpp in Sources */,
+				EB96CBCD1B259639003E6837 /* waveTable.cpp in Sources */,
+				EB7F149B1AF2805B00591C86 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		EB7F149E1AF2805B00591C86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		EB7F149F1AF2805B00591C86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		EB7F14A11AF2805B00591C86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EB7F14A21AF2805B00591C86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EB7F14921AF2805B00591C86 /* Build configuration list for PBXProject "AudioObject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB7F149E1AF2805B00591C86 /* Debug */,
+				EB7F149F1AF2805B00591C86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB7F14A01AF2805B00591C86 /* Build configuration list for PBXNativeTarget "AudioObject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB7F14A11AF2805B00591C86 /* Debug */,
+				EB7F14A21AF2805B00591C86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EB7F148F1AF2805B00591C86 /* Project object */;
+}
