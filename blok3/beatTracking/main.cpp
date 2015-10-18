@@ -17,6 +17,7 @@ enum {ARG_NAME=0, ARG_PATH, ARG_TH, ARG_STEP, ARG_C};
 int main(int argc, char** argv) {
     if (argc != ARG_C) {
         std::cout << "Usage: [audiofile path] [peak threshold] [stepsize]" << std::endl;
+        std::cout << "Example input: beatTracker testsig.wav 0.95 128" << std::endl;
         return -1;
     }
     string path = argv[ARG_PATH];
