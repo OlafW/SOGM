@@ -1,3 +1,12 @@
+/*
+Beat tracking algorithm
+Functions:
+    - autocorrelation of signal
+    - extracting the average period in samples of correlated signal
+    - normalizing
+    - rms
+*/
+
 #ifndef BEATTRACKING_H
 #define BEATTRACKING_H
 

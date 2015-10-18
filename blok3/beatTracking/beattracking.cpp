@@ -15,7 +15,7 @@ float* autoCorrelate(float* x, unsigned long N, int step) {
     return y;
 }
 
-float findPeriod(float* x, unsigned long N, float th) {
+float findPeriod(float* x, unsigned long N, float th) {    //Assumes x = correlated
     float peak = 0;
     vector<unsigned long> peakIndex;
     float threshold;
