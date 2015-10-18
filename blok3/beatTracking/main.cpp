@@ -1,3 +1,8 @@
+/*
+    Beat tracking algorithm
+    Example input: beatTracker testsig.wav 0.95 128
+*/
+
 #include <fstream>
 #include "audio_io.h"
 #include "sndfile_io.h"
@@ -7,19 +12,19 @@
 #define CHANNELS	1
 #define N  1024     // Framesize
 
-enum {ARG_NAME=0, ARG_TH, ARG_STEP, ARG_C};
+enum {ARG_NAME=0, ARG_PATH, ARG_TH, ARG_STEP, ARG_C};
 
 int main(int argc, char** argv) {
     if (argc != ARG_C) {
-        std::cout << "Usage: [peak threshold] [stepsize]" << std::endl;
+        std::cout << "Usage: [audiofile path] [peak threshold] [stepsize]" << std::endl;
         return -1;
     }
-
-    float* buffer = new float[N];
+    string path = argv[ARG_PATH];
     float peakThreshold = atof(argv[ARG_TH]);
     int step = atoi(argv[ARG_STEP]);
 
     // //Start audiostream
+    // float* buffer = new float[N];
     // Audio_IO audioStream(SAMPLERATE, CHANNELS);
     // int input_device;
     // audioStream.set_mode(AUDIO_IO_READONLY);
@@ -33,7 +38,7 @@ int main(int argc, char** argv) {
     // audioStream.read(buffer);   //Blocking I/O
 
     SNDFile sndfile;
-    sndfile.readFile("./drum.wav");
+    sndfile.readFile(path);
     unsigned long bufSize = sndfile.getBufferSize();
 
     float* x_norm = normalize(sndfile.getBuffer(), bufSize);
@@ -50,15 +55,8 @@ int main(int argc, char** argv) {
     // plot.close();
 
     //audioStream.finalise();
-    delete[] buffer;
+    //delete[] buffer;
     delete[] x_norm;
     delete[] y;
     return 0;
 }
-
-/*
-make
-beatTracker 0.968 64
-gnuplot
-plot "plot.txt" with lines
-*/

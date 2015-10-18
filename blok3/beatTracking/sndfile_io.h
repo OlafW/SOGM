@@ -11,8 +11,8 @@ class SNDFile {
 public:
 	SNDFile();
 	~SNDFile();
-	void readFile(string path);
-	void writeFile(float* buffer, SF_INFO sfInfo, string outName);
+	int readFile(string path);
+	int writeFile(float* buffer, SF_INFO sfInfo, string outName);
 	float* getBuffer();
 	unsigned long getBufferSize();
 

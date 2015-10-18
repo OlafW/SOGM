@@ -11,9 +11,14 @@ SNDFile::~SNDFile() {
 	if (buffer) delete[] buffer;
 }
 
-void SNDFile::readFile(string path) {
+int SNDFile::readFile(string path) {
 	this->path = path.c_str();
 	inFile = sf_open(this->path, SFM_READ, &sfInfo);
+
+	if (inFile == NULL) {
+		std::cout << "Error opening file" << std::endl;
+		return -1;
+	}
 
 	sampleRate = sfInfo.samplerate;
 	channels = sfInfo.channels;
@@ -23,13 +28,22 @@ void SNDFile::readFile(string path) {
 
 	sf_readf_float(inFile, buffer, N);
 	sf_close(inFile);
+
+	return 0;
 }
 
-void SNDFile::writeFile(float* buffer, SF_INFO sfInfo, string outName) {
+int SNDFile::writeFile(float* buffer, SF_INFO sfInfo, string outName) {
 	outFile = sf_open(outName.c_str(), SFM_WRITE, &sfInfo);
+
+	if (outFile == NULL) {
+		std::cout << "Error writing file" << std::endl;
+		return -1;
+	}
 
 	sf_writef_float(outFile, buffer, sfInfo.frames);
 	sf_close(outFile);
+
+	return 0;
 }
 
 float* SNDFile::getBuffer() {
