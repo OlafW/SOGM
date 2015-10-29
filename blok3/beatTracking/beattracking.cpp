@@ -15,8 +15,9 @@ float* autoCorrelate(float* x, unsigned long N, int step) {
     return y;
 }
 
-float findPeriod(float* x, unsigned long N, float th) {    //Assumes x = correlated
+float findPeriod(float* x, unsigned long N, float th, float fb_reset) {    //Assumes x = correlated
     float peak = 0, threshold = 0;
+    float fb_inhib = 1, recharge = 0.999;
     vector<unsigned long> peakIndex;
 
     //1. Find highest peak
@@ -27,15 +28,14 @@ float findPeriod(float* x, unsigned long N, float th) {    //Assumes x = correla
     }
     std::cout << "Peak: " << peak << std::endl;
 
-    //2. Find all peaks within range
-    threshold = th * peak;
+    //2. Find all peaks based on threshold and inhibitory feedback factor
     for (unsigned long i=0; i<N; i++) {
+        threshold = th * peak * fb_inhib;
         if (x[i] > threshold) {
             peakIndex.push_back(i);
+            fb_inhib = fb_reset;
         }
-        else {
-            x[i] = 0;   //For plotting
-        }
+        else if (fb_inhib >= 1) fb_inhib *= recharge;
     }
     std::cout << "Peakcount: " << peakIndex.size() << std::endl;
 
@@ -43,7 +43,7 @@ float findPeriod(float* x, unsigned long N, float th) {    //Assumes x = correla
     float avgPeriod = 0;
     for (unsigned long i=0; i<peakIndex.size()-1; i++) {
         avgPeriod += peakIndex[i+1] - peakIndex[i];
-        //std::cout << "Period: " << peakIndex[i+1] - peakIndex[i] << std::endl;
+        std::cout << "Period: " << peakIndex[i+1] - peakIndex[i] << std::endl;
     }
     avgPeriod /= (peakIndex.size() - 1);
 
