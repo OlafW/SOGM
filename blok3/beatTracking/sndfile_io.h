@@ -15,6 +15,7 @@ public:
 	int writeFile(float* buffer, SF_INFO sfInfo, string outName);
 	float* getBuffer();
 	unsigned long getBufferSize();
+	int getSampleRate();
 
 private:
 	SF_INFO sfInfo;

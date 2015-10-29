@@ -53,3 +53,7 @@ float* SNDFile::getBuffer() {
 unsigned long SNDFile::getBufferSize() {
 	return N*channels;
 }
+
+int SNDFile::getSampleRate() {
+	return sampleRate;
+}
