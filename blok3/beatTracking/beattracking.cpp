@@ -15,9 +15,8 @@ float* autoCorrelate(float* x, unsigned long N, int step) {
     return y;
 }
 
-float findPeriod(float* x, unsigned long N, float th, float fb_reset) {    //Assumes x = correlated
-    float peak = 0, threshold = 0;
-    float fb_inhib = 1, recharge = 0.999;
+float findPeriod(float* x, unsigned long N, float th_min, float th_max, float discharge) { //Assumes x = correlated
+    float peak = 0, threshold = 0, fb_val = th_min;
     vector<unsigned long> peakIndex;
 
     //1. Find highest peak
@@ -30,20 +29,23 @@ float findPeriod(float* x, unsigned long N, float th, float fb_reset) {    //Ass
 
     //2. Find all peaks based on threshold and inhibitory feedback factor
     for (unsigned long i=0; i<N; i++) {
-        threshold = th * peak * fb_inhib;
+        threshold = peak * fb_val;
         if (x[i] > threshold) {
             peakIndex.push_back(i);
-            fb_inhib = fb_reset;
+            fb_val = th_max;    //Recharge to maximum threshold
         }
-        else if (fb_inhib >= 1) fb_inhib *= recharge;
+        else if (fb_val > th_min)
+            fb_val *= discharge;  //Discharge to minimum threshold
     }
     std::cout << "Peakcount: " << peakIndex.size() << std::endl;
 
-    //3. Find average period in samples according to sample indexes of peaks
-    float avgPeriod = 0;
+    //3. Find average period in samples according to weighted sample indexes of peaks
+    //   Weighting is based on difference between peak and maximum peak
+    float avgPeriod = 0, weight = 1;
+
     for (unsigned long i=0; i<peakIndex.size()-1; i++) {
-        avgPeriod += peakIndex[i+1] - peakIndex[i];
-        std::cout << "Period: " << peakIndex[i+1] - peakIndex[i] << std::endl;
+        weight = 1.0 - ( 2.0*peak - (x[peakIndex[i+1]] + x[peakIndex[i]]) );
+        avgPeriod += weight * (peakIndex[i+1] - peakIndex[i]);
     }
     avgPeriod /= (peakIndex.size() - 1);
 
@@ -55,9 +57,9 @@ float stdDeviation(float* x, unsigned long N) {
     float mean = 0, variance = 0, deviation = 0;
 
     for (unsigned long i=0; i<N; i++) {
-        mean += x[i];
+        mean += x[i] * x[i];
     }
-    mean /= N;
+    mean = sqrt(mean / N);
 
     for (unsigned long i=0; i<N; i++) {
         variance += pow((x[i] - mean), 2);
