@@ -10,6 +10,7 @@
     Example input 4: beatTracker sound/shaker_102bpm.wav 1024 0.1 10 0.9998
 */
 
+#include <stdlib.h>
 #include <fstream>
 #include "sndfile_io.h"
 #include "beattracking.h"

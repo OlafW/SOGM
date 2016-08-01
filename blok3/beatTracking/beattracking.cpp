@@ -35,7 +35,7 @@ float findPeriod(float* x, unsigned long N, float th_min, float th_max, float di
             fb_val = th_max;    //Recharge to maximum threshold
         }
         else if (fb_val > th_min)
-            fb_val *= discharge;  //Discharge to minimum threshold
+                 fb_val *= discharge;  //Discharge to minimum threshold
     }
     std::cout << "Peakcount: " << peakIndex.size() << std::endl;
 
