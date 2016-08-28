@@ -11,7 +11,7 @@ public:
     void setDelayTime(unsigned int delayTime);
 
 private:
-    float* ringBuffer;
+    double* ringBuffer;
 
     unsigned int readHead;
     unsigned int writeHead;

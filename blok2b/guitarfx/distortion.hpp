@@ -8,6 +8,7 @@ class Distortion : public Amplifier {
 
 public:
     Distortion();
+    ~Distortion() {};
     void process(float* buffer);
     void setGain(float gain);
 

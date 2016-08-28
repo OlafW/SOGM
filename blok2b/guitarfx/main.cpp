@@ -35,7 +35,7 @@ void intHandler(int s) {
 int main (int argc, char* argv[]) {
     const unsigned long N = FRAMES * CHANNELS;
     float* buffer = new float[N];
-    for (unsigned long n=0; n<N; n++) buffer[n] = 1.0;
+    for (unsigned long n=0; n<N; n++) buffer[n] = 0.0;
 
     signal (SIGINT, intHandler);
 
@@ -50,16 +50,17 @@ int main (int argc, char* argv[]) {
     Distortion distortion;
     distortion.setGain(10.0);
 
-    Delay delay(50);
-    delay.setDelayTime(1);
+    Delay delay(2000);
+    delay.setDelayTime(1000);
 
     startAudio();
 
     while (!quit) {
-        //audioStream.read(buffer);
+        audioStream.read(buffer);
         delay.process(buffer);
-        //audioStream.write(buffer);
-        break;
+        amplifier.process(buffer);
+        audioStream.write(buffer);
+        //break;
     }
 
     audioStream.finalise();

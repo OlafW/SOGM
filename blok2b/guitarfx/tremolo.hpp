@@ -8,6 +8,7 @@ class Tremolo : public Amplifier {
 
 public:
   Tremolo();
+  ~Tremolo() {};
   void setModFreq(float modFreq);
   void setModDepth(float modDepth);
   void process(float* buffer);
