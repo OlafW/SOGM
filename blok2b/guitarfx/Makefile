@@ -1,8 +1,7 @@
 CC = g++
-CFLAGS = -Wall
+CFLAGS = -I/usr/local/include -Wall -I../include
 LDFLAGS= -L/usr/local/lib -lportaudio
-
-OBJ=amplifier.o main.o tremolo.o reverser.o audio_io.o
+OBJ = audio_io.o main.o amplifier.o tremolo.o distortion.o delay.o
 
 all: guitarfx
 

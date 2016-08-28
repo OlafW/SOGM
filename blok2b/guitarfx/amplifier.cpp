@@ -1,65 +1,23 @@
-#include "amplifier.h"
-#include <iostream>
-using namespace std;
+#include "amplifier.hpp"
 
-Amplifier::Amplifier() //Constructor
-{
-    this->level=1;
-    bufIndex = 0;
+Amplifier::Amplifier() {
+    gain = 1.0;
 }
 
-
-// Amplifier::~Amplifier() //Destructor
-// {
-//
-// }
-
-
-void Amplifier::setLevel(float level)
-{
-  this->level = level;
-}
-
-
-void Amplifier::startAudio()
-{
-  audioStream.set_mode(AUDIO_IO_READWRITE);
-  audioStream.set_samplerate(sampleRate);
-  audioStream.set_nrofchannels(numChannels);
-  audioStream.set_framesperbuffer(numFrames);
-  audioStream.initialise();
-  audioStream.list_devices();
-  cout << "\nGive input device number: ";
-  cin >> input_device;
-  audioStream.set_input_device(input_device);
-  cout << "Give output device number: ";
-  cin >> output_device;
-  audioStream.set_output_device(output_device);
-  audioStream.start_server();
-}
-
-
-void Amplifier::readSamples()
-{
-  audioStream.read(buffer);
-}
-
-
-void Amplifier::process()
-{
-    for (int bufIndex = 0; bufIndex < numFrames * numChannels; bufIndex++) {
-    buffer[bufIndex] = buffer[bufIndex] * level;
+void Amplifier::process(float* buffer) {
+    for (unsigned long n=0; n<FRAMES; n++) {
+        for (int k=0; k<CHANNELS; k++) {
+            buffer[n*CHANNELS+k] = clip(buffer[n*CHANNELS+k] * gain, -1.0, 1.0);
+        }
     }
 }
 
-
-void Amplifier::writeSamples()
-{
-  audioStream.write(buffer);
+void Amplifier::setGain(float gain) {
+    this->gain = gain;
 }
 
-
-void Amplifier::stopAudio()
-{
-  audioStream.finalise();
+float Amplifier::clip(float x, float min, float max) {
+    if (x > max) return 1.0;
+    else if (x < min) return -1.0;
+    else return x;
 }

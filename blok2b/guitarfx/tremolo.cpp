@@ -1,31 +1,30 @@
-#include "tremolo.h"
-#include <math.h>
+#include "tremolo.hpp"
 
 
-Tremolo::Tremolo() //Constructor
-{
-    Amplifier();
-    this->modDepth = 0.5;
-    this->modFreq = 5;
-    sampleIndex = 0;
+Tremolo::Tremolo() : Amplifier() {
+    modDepth = 0.5;
+    modFreq = 5;
+    phase = 0;
+    period = SAMPLERATE / modFreq;
 }
-
 
 void Tremolo::setModFreq(float modFreq) {
   this->modFreq = modFreq;
+  period = SAMPLERATE / modFreq;
 }
-
 
 void Tremolo::setModDepth(float modDepth) {
-  this->modDepth = modDepth;
+    this->modDepth = clip(modDepth, 0.0, 1.0);
 }
 
+void Tremolo::process(float* buffer) {
+  for (unsigned long n=0; n<FRAMES; n++) {
+      for (int k=0; k<CHANNELS; k++) {
 
-void Tremolo::process()
-{
-  for (bufIndex = 0; bufIndex < numFrames * numChannels; bufIndex++) {
-
-    buffer[bufIndex] = buffer[bufIndex] * (((sin( sampleIndex * modFreq/sampleRate * 2*M_PI ) *modDepth) + 1) * 0.5);
-    sampleIndex++;
+          float modulation = sin(phase * modFreq/SAMPLERATE * 2.0*M_PI) * 0.5 + 0.5;
+          buffer[n*CHANNELS+k] = buffer[n*CHANNELS+k] * (1.0-modDepth) +
+                                 buffer[n*CHANNELS+k] * modulation * modDepth;
+      }
+      if (++phase > period) phase = 0;
   }
 }
