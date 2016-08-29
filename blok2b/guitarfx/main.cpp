@@ -33,14 +33,14 @@ void intHandler(int s) {
 }
 
 int main (int argc, char* argv[]) {
-    const unsigned long N = FRAMES * CHANNELS;
+    int N = FRAMES * CHANNELS;
     float* buffer = new float[N];
-    for (unsigned long n=0; n<N; n++) buffer[n] = 0.0;
+    for (int n=0; n<N; n++) buffer[n] = 0.0;
 
     signal (SIGINT, intHandler);
 
     Amplifier amplifier;
-    amplifier.setGain(1.0);
+    amplifier.setGain(0.5);
     amplifier.process(buffer);
 
     Tremolo tremolo;
@@ -50,8 +50,9 @@ int main (int argc, char* argv[]) {
     Distortion distortion;
     distortion.setGain(10.0);
 
-    Delay delay(2000);
+    Delay delay(5000);
     delay.setDelayTime(1000);
+    delay.setFeedback(0.01);
 
     startAudio();
 
@@ -60,10 +61,17 @@ int main (int argc, char* argv[]) {
         delay.process(buffer);
         amplifier.process(buffer);
         audioStream.write(buffer);
-        //break;
     }
-
     audioStream.finalise();
+
+
+    // int count = 0;
+    // for (int i=0; i<10; i++) {
+    //     std::cout << "          ROUND   " << i << std::endl;
+    //     for (int n=0; n<N; n++) buffer[n] = ++count;
+    //     delay.process(buffer);
+    // }
+
     delete[] buffer;
 
     return 0;

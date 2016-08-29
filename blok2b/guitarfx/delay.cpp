@@ -1,46 +1,54 @@
 #include "delay.hpp"
 
-Delay::Delay(unsigned int maxDelayTime) : Amplifier() {
-    this->maxDelayTime = (maxDelayTime * SAMPLERATE) / 1000;
-
-    delayTime = maxDelayTime;
-    readHead = 0;
-    writeHead = 0;
+Delay::Delay(unsigned int ringBufferSize) : Amplifier() {
+    this->ringBufferSize = (ringBufferSize * SAMPLERATE) / 1000;
+    delayTime = this->ringBufferSize*CHANNELS;
     feedback = 0.0;
+    readHead = 0;
+    writeHead = delayTime-FRAMES*CHANNELS;
 
-    ringBuffer = new double[maxDelayTime];
-    for (unsigned int n=0; n<maxDelayTime; n++) {
-        ringBuffer[n] = 0.0;
-    }
+    ringBuffer = new float[this->ringBufferSize*CHANNELS];
+
+    for (int n=0; n<this->ringBufferSize; n++)
+        for (int k=0; k<CHANNELS; k++) ringBuffer[n*CHANNELS+k] = 0.0;
 }
 
 Delay::~Delay() {
-    if (ringBuffer) delete[] ringBuffer;
+    delete[] ringBuffer;
 }
 
 void Delay::process(float* buffer) {
-    for (unsigned long n=0; n<FRAMES; n++) {
+    // Write to ringbuffer
+    for (int n=0; n<FRAMES; n++) {
         for (int k=0; k<CHANNELS; k++) {
-            ringBuffer[(delayTime-1)-writeHead] = buffer[n*CHANNELS+k];
-
-            // std::cout << "writeHead " << (delayTime-1)-writeHead;
-            // std::cout << " buffer " << (FRAMES*CHANNELS-1) - (n*CHANNELS+k) << std::endl;
-            writeHead = (writeHead+1) % delayTime;
+            ringBuffer[writeHead] = buffer[n*CHANNELS+k];
+            writeHead = (writeHead+1) % ringBufferSize;
          }
     }
 
-    for (unsigned long n=0; n<FRAMES; n++) {
+    // Read from ringbuffer
+    for (int n=0; n<FRAMES; n++) {
         for (int k=0; k<CHANNELS; k++) {
             buffer[n*CHANNELS+k] = ringBuffer[readHead];
-            // std::cout << "readHead " << readHead;
-            // std::cout << " buffer " << n*CHANNELS+k << std::endl;
-            //std::cout << buffer[n*CHANNELS+k] << std::endl;
-            readHead = (readHead+1) % delayTime;
+            readHead = (readHead+1) % ringBufferSize;
         }
     }
+
+    // for (int i=0; i<ringBufferSize; i++)
+    //     std::cout << ringBuffer[i] << " ";
+    // std::cout << "\n";
+    //
+    // for (int i=0; i<FRAMES*CHANNELS; i++)
+    //     std::cout << buffer[i] << " ";
+    // std::cout << "\n";
 }
 
-
 void Delay::setDelayTime(unsigned int delayTime) {
-    this->delayTime = clip((delayTime * SAMPLERATE) / 1000, 1, maxDelayTime);
+    this-> delayTime = (delayTime * SAMPLERATE) / 1000 * CHANNELS;
+    this->delayTime = clip(this->delayTime, FRAMES, ringBufferSize*CHANNELS);
+    writeHead = this->delayTime-FRAMES*CHANNELS;
+}
+
+void Delay::setFeedback(float feedback) {
+    this->feedback = clip(feedback, 0.0, 1.0);
 }

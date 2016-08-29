@@ -5,19 +5,20 @@
 
 class Delay : public Amplifier {
 public:
-    Delay(unsigned int maxDelayTime);
+    Delay(unsigned int ringBufferSize);
     ~Delay();
     void process(float* buffer);
     void setDelayTime(unsigned int delayTime);
+    void setFeedback(float feedback);
 
 private:
-    double* ringBuffer;
-
-    unsigned int readHead;
-    unsigned int writeHead;
+    float* ringBuffer;
+    unsigned int ringBufferSize;
     unsigned int delayTime;
-    unsigned int maxDelayTime;
     float feedback;
+
+    int readHead;
+    int writeHead;
 };
 
 #endif

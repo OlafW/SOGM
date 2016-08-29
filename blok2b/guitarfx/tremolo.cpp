@@ -18,7 +18,7 @@ void Tremolo::setModDepth(float modDepth) {
 }
 
 void Tremolo::process(float* buffer) {
-  for (unsigned long n=0; n<FRAMES; n++) {
+  for (int n=0; n<FRAMES; n++) {
       for (int k=0; k<CHANNELS; k++) {
 
           float modulation = sin(phase * modFreq/SAMPLERATE * 2.0*M_PI) * 0.5 + 0.5;

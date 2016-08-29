@@ -4,7 +4,7 @@
 #include <iostream>
 
 const int SAMPLERATE = 44100;
-const int CHANNELS = 2;
+const int CHANNELS = 1;
 const int FRAMES = 64;
 
 class Amplifier {
