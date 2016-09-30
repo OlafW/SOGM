@@ -30,29 +30,34 @@ string solmization(string text) {
     string melody;
 
     // For every character in the text
-    for (int n=0; n<text.length(); n++) {
+    for (int n = 0; n < text.length(); n++) {
         char c = text[n];
 
         // If character is a vowel,
         // Choose a note based on character and random sequence index
-        for (int v=0; v<numVowels; v++) {
+        for (int v = 0; v < numVowels; v++) {
             if (c == vowels[v]) {
                 int dur = 0;
                 bool nextVowel = false;
 
-                for (int m=n+1; m<text.length(); m++) {
+                // Find the next vowel to calculate note duration
+                for (int m = n+1; m < text.length()-1; m++) {
                     char c2 = text[m];
 
-                    for (int v2=0; v2<numVowels; v2++) {
+                    for (int v2 = 0; v2 < numVowels; v2++) {
                         if (c2 == vowels[v2]) {
                             int randomSeq = rand() % numSequence;
                             melody += vowelSequence[randomSeq][v] + duration[dur] + " ";
+
+                            dur = 0;
                             nextVowel = true;
-                            break;
                         }
-                        else if (dur < numDuration-1) dur++;
+                        if (nextVowel) break;
                     }
                     if (nextVowel) break;
+                    else {
+                        if (c2 != ' ' && dur < numDuration-1) dur++;
+                    }
                 }
             }
         }
@@ -79,3 +84,9 @@ int main() {
 
     return 0;
 }
+
+/*
+make solmization
+solmization
+open solmization.ly
+*/
