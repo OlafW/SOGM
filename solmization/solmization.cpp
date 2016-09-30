@@ -5,23 +5,25 @@
 using std::string;
 
 /*
-    Implementation of solmization method of Guido d'Arezzo (c.q. 1026).
-    Every vowel in a text correspond to notes in a scale.
+    Small implementation of the solmization method of Guido d'Arezzo (c.q. 1026).
+    Every vowel in a text corresponds to notes in a scale.
     The vowel sequence 'a e i o u' is mapped to the pitches of the double octave (g3 - g5).
 
-    Input: text to be put to music
-    Ouput: notated music in lilyPond format
+    Input: text to be put to melody
+    Output: notated melody in LilyPond format
 */
 
 const int numSequence = 3;
 const int numVowels = 5;
 const char vowels[numVowels] = {'a', 'e', 'i', 'o', 'u'};
+const int numDuration = 4;
+char duration[numDuration] = {'8', '4', '2', '1'};
 
 const string vowelSequence[numSequence][numVowels] = {
     // a     e     i     o     u
-    { "g,", "a,", "b,", "c,", "d,"},
-    { "e",  "f",  "g",  "a",  "b" },
-    { "c'", "d'", "e'", "f'" "g'" }
+    {"g,", "a,", "b,", "c,", "d,"},
+    {"e", "f", "g", "a", "b"},
+    {"c'", "d'", "e'", "f'", "g'"}
 };
 
 string solmization(string text) {
@@ -31,12 +33,27 @@ string solmization(string text) {
     for (int n=0; n<text.length(); n++) {
         char c = text[n];
 
-        // If character is vowel,
-        // Choose a note based on random sequence and character
+        // If character is a vowel,
+        // Choose a note based on character and random sequence index
         for (int v=0; v<numVowels; v++) {
             if (c == vowels[v]) {
-                int randomSeq = rand() % numSequence;
-                melody += vowelSequence[randomSeq][v] + " ";
+                int dur = 0;
+                bool nextVowel = false;
+
+                for (int m=n+1; m<text.length(); m++) {
+                    char c2 = text[m];
+
+                    for (int v2=0; v2<numVowels; v2++) {
+                        if (c2 == vowels[v2]) {
+                            int randomSeq = rand() % numSequence;
+                            melody += vowelSequence[randomSeq][v] + duration[dur] + " ";
+                            nextVowel = true;
+                            break;
+                        }
+                        else if (dur < numDuration-1) dur++;
+                    }
+                    if (nextVowel) break;
+                }
             }
         }
     }
@@ -45,15 +62,17 @@ string solmization(string text) {
 
 
 int main() {
-    string text = "Ut queant laxis resonare";
+    srand(time(NULL));
+    string text = "ut queant laxis resonare";
     string melody = solmization(text);
 
-    // Write to lilyPond file
+    // Write to LilyPond file
     std::ofstream lilyPondFile;
     lilyPondFile.open("solmization.ly");
 
     lilyPondFile << "\\version \"2.16.0\" \n\n";
     lilyPondFile << "{ \n";
+    lilyPondFile << "\t" << "\\clef \"bass\" \n";
     lilyPondFile << "\t" << melody << "\n";
     lilyPondFile << "} \n";
     lilyPondFile.close();
