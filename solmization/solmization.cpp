@@ -17,7 +17,7 @@ const int numSequence = 3;
 const int numVowels = 5;
 const char vowels[numVowels] = {'a', 'e', 'i', 'o', 'u'};
 const int numDuration = 4;
-char duration[numDuration] = {'8', '4', '2', '1'};
+const char duration[numDuration] = {'8', '4', '2', '1'};
 
 const string vowelSequence[numSequence][numVowels] = {
     // a     e     i     o     u
@@ -66,9 +66,12 @@ string solmization(string text) {
 }
 
 
-int main() {
+int main(int argc, char** argv) {
     srand(time(NULL));
-    string text = "ut queant laxis resonare";
+
+    string text;
+    if (argc == 2) text = argv[1];
+    else text = "ut queant laxis resonare";
     string melody = solmization(text);
 
     // Write to LilyPond file

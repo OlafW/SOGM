@@ -2,5 +2,5 @@
 
 { 
 	\clef "bass" 
-	d,2 b8 f8 g,1 c'4 g2 f4 c,4 
+	g'2 d,8 a,8 e1 c'4 g2 d'4 c,4 
 } 
