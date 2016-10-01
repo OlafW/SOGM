@@ -26,7 +26,7 @@ const string vowelSequence[numSequence][numVowels] = {
     {"c'", "d'", "e'", "f'", "g'"}
 };
 
-string solmization(string text) {
+string solmization(string text, bool fixedDuration) {
     string melody;
 
     // For every character in the text
@@ -35,28 +35,34 @@ string solmization(string text) {
 
         // If character is a vowel,
         // Choose a note based on character and random sequence index
+        // Duration is based on next vowel or fixed duration
         for (int v = 0; v < numVowels; v++) {
             if (c == vowels[v]) {
-                int dur = 0;
-                bool nextVowel = false;
+                if (fixedDuration) {
+                    int randomSeq = rand() % numSequence;
+                    melody += vowelSequence[randomSeq][v] + duration[1] + " ";
+                }
+                else {
+                    int dur = 0;
+                    bool nextVowel = false;
 
-                // Find the next vowel to calculate note duration
-                for (int m = n+1; m < text.length()-1; m++) {
-                    char c2 = text[m];
+                    for (int m = n+1; m < text.length(); m++) {
+                        char c2 = text[m];
 
-                    for (int v2 = 0; v2 < numVowels; v2++) {
-                        if (c2 == vowels[v2]) {
-                            int randomSeq = rand() % numSequence;
-                            melody += vowelSequence[randomSeq][v] + duration[dur] + " ";
+                        for (int v2 = 0; v2 < numVowels; v2++) {
+                            if (c2 == vowels[v2]) {
+                                int randomSeq = rand() % numSequence;
+                                melody += vowelSequence[randomSeq][v] + duration[dur] + " ";
 
-                            dur = 0;
-                            nextVowel = true;
+                                dur = 0;
+                                nextVowel = true;
+                            }
+                            if (nextVowel) break;
                         }
                         if (nextVowel) break;
-                    }
-                    if (nextVowel) break;
-                    else {
-                        if (c2 != ' ' && dur < numDuration-1) dur++;
+                        else {
+                            if (c2 != ' ' && dur < numDuration-1) dur++;
+                        }
                     }
                 }
             }
@@ -69,20 +75,38 @@ string solmization(string text) {
 int main(int argc, char** argv) {
     srand(time(NULL));
 
-    string text;
-    if (argc == 2) text = argv[1];
-    else text = "ut queant laxis resonare";
-    string melody = solmization(text);
+    string text = "ut queant laxis resonare";
+    bool fixedDuration = true;
+    string melody = solmization(text, fixedDuration);
 
     // Write to LilyPond file
     std::ofstream lilyPondFile;
     lilyPondFile.open("solmization.ly");
 
     lilyPondFile << "\\version \"2.16.0\" \n\n";
-    lilyPondFile << "{ \n";
-    lilyPondFile << "\t" << "\\clef \"bass\" \n";
-    lilyPondFile << "\t" << melody << "\n";
-    lilyPondFile << "} \n";
+    lilyPondFile << "\\score { \n";
+        lilyPondFile << "\t" << "<< \n";
+
+        lilyPondFile << "\t" << "\\new Staff { \n";
+            lilyPondFile << "\t\t" << "\\new Voice { \n";
+                lilyPondFile << "\t\t\t" << "\\clef \"bass\" \n";
+                lilyPondFile << "\t\t\t" << melody << "\n";
+            lilyPondFile << "\t\t" << "}\n";
+            lilyPondFile << "\t\t" << "\\addlyrics { \n";
+                lilyPondFile << "\t\t\t" << "ut que -- ant lax -- is re -- son -- a -- re\n";
+            lilyPondFile << "\t\t" << "}\n";
+        lilyPondFile << "\t" << "}\n";
+
+        lilyPondFile << "\t" << ">> \n\n";
+
+        lilyPondFile << "\t" << "\\layout { \n";
+            lilyPondFile << "\t\t" << "\\context { \n";
+                lilyPondFile << "\t\t" << "\\Staff\n";
+                lilyPondFile << "\t\t""\t" << "\\remove Bar_engraver\n";
+                lilyPondFile << "\t\t""\t" << "\\remove Time_signature_engraver \n";
+            lilyPondFile << "\t\t" << "}\n";
+        lilyPondFile << "\t" << "}\n";
+    lilyPondFile << "}\n";
     lilyPondFile.close();
 
     return 0;
