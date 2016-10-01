@@ -26,7 +26,7 @@ const string vowelSequence[numSequence][numVowels] = {
     {"c'", "d'", "e'", "f'", "g'"}
 };
 
-string solmization(string text, bool fixedDuration) {
+string solmization(string text) {
     string melody;
 
     // For every character in the text
@@ -38,31 +38,25 @@ string solmization(string text, bool fixedDuration) {
         // Duration is based on next vowel or fixed duration
         for (int v = 0; v < numVowels; v++) {
             if (c == vowels[v]) {
-                if (fixedDuration) {
-                    int randomSeq = rand() % numSequence;
-                    melody += vowelSequence[randomSeq][v] + duration[1] + " ";
-                }
-                else {
-                    int dur = 0;
-                    bool nextVowel = false;
+                int dur = 0;
+                bool nextVowel = false;
 
-                    for (int m = n+1; m < text.length(); m++) {
-                        char c2 = text[m];
+                for (int m = n+1; m < text.length(); m++) {
+                    char c2 = text[m];
 
-                        for (int v2 = 0; v2 < numVowels; v2++) {
-                            if (c2 == vowels[v2]) {
-                                int randomSeq = rand() % numSequence;
-                                melody += vowelSequence[randomSeq][v] + duration[dur] + " ";
+                    for (int v2 = 0; v2 < numVowels; v2++) {
+                        if (c2 == vowels[v2]) {
+                            int randomSeq = rand() % numSequence;
+                            melody += vowelSequence[randomSeq][v] + duration[1] + " ";
 
-                                dur = 0;
-                                nextVowel = true;
-                            }
-                            if (nextVowel) break;
+                            dur = 0;
+                            nextVowel = true;
                         }
                         if (nextVowel) break;
-                        else {
-                            if (c2 != ' ' && dur < numDuration-1) dur++;
-                        }
+                    }
+                    if (nextVowel) break;
+                    else {
+                        if (c2 != ' ' && dur < numDuration-1) dur++;
                     }
                 }
             }
@@ -77,7 +71,7 @@ int main(int argc, char** argv) {
 
     string text = "ut queant laxis resonare";
     bool fixedDuration = true;
-    string melody = solmization(text, fixedDuration);
+    string melody = solmization(text);
 
     // Write to LilyPond file
     std::ofstream lilyPondFile;
