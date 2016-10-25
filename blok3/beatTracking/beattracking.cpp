@@ -1,16 +1,16 @@
 #include "beattracking.h"
 
-float* autoCorrelate(float* x, unsigned long N, int step) {
+float* autoCorrelate(float* x, unsigned long N) {
     float *y = new float[N];
     float sum;
 
-    for (unsigned long i=0; i<N; i+=step) {
+    for (unsigned long n=0; n<N; n++) {
         sum = 0;
-        for (unsigned long j=0; j<N-i; j+=step) {
-            sum += x[j] * x[j+i];
+        for (unsigned long m=0; m<N-n; m++) {
+            sum += x[m] * x[m + n];
         }
-        sum = sqrt(sum*sum);    //Absolute value
-        y[i] = sum / ((N - i) / float(step)); //Normalise
+        sum = sqrt(sum*sum);   // Absolute value
+        y[n] = sum / (N - n); // Normalise
     }
     return y;
 }

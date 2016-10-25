@@ -1,4 +1,8 @@
+.DS_Store
+*.o
+*.lib
+*.zip
+*.obj
+*.app
 *.wav
 *.mp3
-*.o
-.DS_Store

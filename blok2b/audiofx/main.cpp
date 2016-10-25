@@ -11,7 +11,7 @@ bool quit = false;
 
 void startAudio() {
     int input_device = 0;
-    int output_device = 2;
+    int output_device = 1;
     audioStream.set_mode(AUDIO_IO_READWRITE);
     audioStream.set_samplerate(SAMPLERATE);
     audioStream.set_nrofchannels(CHANNELS);

@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
         return -1;
     }
     string path = argv[ARG_PATH];
-    int step = atoi(argv[ARG_STEP]);    //Power of 2?
+    int step = atoi(argv[ARG_STEP]);    // unused
     float th_min = atof(argv[ARG_TH_MIN]);
     float th_max = atof(argv[ARG_TH_MAX]);
     float discharge = atof(argv[ARG_DISCHARGE]);
@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
     int FS = sndfile.getSampleRate();
 
     float* x = normalize(sndfile.getBuffer(), N);
-    float* y = autoCorrelate(x, N, step);
+    float* y = autoCorrelate(x, N);
     float period = findPeriod(y, N, th_min, th_max, discharge);
 
     float BPM = 1.0 / (period / FS) * 60.0;
